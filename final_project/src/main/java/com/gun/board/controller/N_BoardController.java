@@ -195,6 +195,50 @@ public class N_BoardController {
       }
       return null;
    }
+   
+   @RequestMapping(value = "/downloadBoardIMG", method = RequestMethod.GET)
+	public String download(HttpServletResponse response, String cus_id) {
+	   
+	   
+		Customer customer = cRepository.getPhoto(cus_id);
+		
+		String originalfile = customer.getBoard_fileid();
+
+		try {
+			response.setHeader("Content-Disposition",
+					"attachment;filename=" + URLEncoder.encode(originalfile, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String fullpath = Configuration.PHOTOPATH + "/" + customer.getBoard_uploadfileid();
+
+		ServletOutputStream fileout = null;
+		FileInputStream filein = null;
+
+		try {
+			filein = new FileInputStream(fullpath);
+			fileout = response.getOutputStream();
+			FileCopyUtils.copy(filein, fileout);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (filein != null) {
+					filein.close();
+				}
+				if (fileout != null) {
+					fileout.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
 
 
    @RequestMapping(value = "/delete", method = RequestMethod.POST)

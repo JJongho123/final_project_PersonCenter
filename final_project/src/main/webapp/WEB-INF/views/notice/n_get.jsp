@@ -91,7 +91,7 @@ function updateBoard(board_num){
 					<div class="WriterInfo">
 						<a href="/ca-fe/cafes/10050146/members/prkQguvG11zjC0KAkeAh_A"
 							class="thumb"><img
-							src="${pageContext.request.contextPath}/customer/download"
+							src="${pageContext.request.contextPath}/notice/downloadBoardIMG?cus_id=${board.board_no_id}"
 							alt="프로필 사진" width="36" height="36"></a>
 						<div class="profile_area">
 							<div class="profile_info">
