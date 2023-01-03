@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gun.board.dao.UnionDAO">
+
+ <select id="getUnion_home" resultType="Union" parameterType="List">
+      
+    SELECT * FROM
+	(  
+ 	SELECT * FROM
+	(
+ 		SELECT board_num,board_date,board_title,board_check FROM board 
+    	   UNION ALL  
+    	SELECT board_num,board_no_date,board_no_title,board_check FROM board_notice 
+   		   UNION ALL
+   		SELECT board_num,board_date,board_title,board_check FROM board_data 
+	)
+		ORDER BY board_date DESC
+	)
+      <![CDATA[where rownum <= 5]]>
+      
+   </select>
+	
+</mapper>
