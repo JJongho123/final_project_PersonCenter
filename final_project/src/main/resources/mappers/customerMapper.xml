@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.gun.board.dao.CustomerDAO">
 	<insert id="insertCustomer">
 		insert into
-		board_customer(cus_id,cus_pw,cus_gender,cus_nickname,cus_question,cus_answer,cus_bank,cus_account,cus_zip_code,cus_addr,cus_tel)
+		board_customer(cus_id,cus_pw,cus_gender,cus_nickname,cus_question,cus_answer,cus_bank,cus_account,cus_zip_code,cus_addr,cus_tel,cus_grade)
 		values(
-		#{cus_id},#{cus_pw},#{cus_gender},#{cus_nickname},#{cus_question},#{cus_answer},#{cus_bank},#{cus_account},#{cus_zip_code},#{cus_addr},#{cus_tel}
+		#{cus_id},#{cus_pw},#{cus_gender},#{cus_nickname},#{cus_question},#{cus_answer},#{cus_bank},#{cus_account},#{cus_zip_code},#{cus_addr},#{cus_tel},#{cus_grade}
 		)
 	</insert>
 
@@ -104,19 +104,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="GradeUpdate" parameterType="Map">
 		<choose>
-			<when test="cus_count == 0 or cus_count == 1 or cus_count == 2 ">
+			<when test="cus_count == 1">
 				UPDATE board_customer 
 					SET cus_grade = '🌱새싹회원'
 					where cus_id=#{cus_id}
 			</when>
 			
-			<when test="cus_count == 3 or cus_count == 4 or cus_count == 5 ">
+			<when test="cus_count == 2 ">
 				UPDATE board_customer 
 					SET cus_grade = '☘️잎새회원'
 					where cus_id=#{cus_id}
 			</when>
 			
-			<when test="cus_count == 6 or cus_count == 7 or cus_count == 8">
+			<when test="cus_count == 3">
 				UPDATE board_customer 
 					SET cus_grade = '🌲나무회원'
 					where cus_id=#{cus_id}

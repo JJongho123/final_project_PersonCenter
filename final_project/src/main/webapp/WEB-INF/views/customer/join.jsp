@@ -247,14 +247,7 @@ $(function(){
                            </div>
                            </div>
                            
-                         <div class="form-group row">
-                           <label class="col-sm-2 col-form-label" for="reg_mb_password_re">
-                         <strong class="sr-only">필수</strong>
-                             </label>
-                           <div class="col-sm-4">
-                             <input placeholder="상세주소" name="cus_addr" id="cus_addr" class="form-control" style="width:343; height:40 ;" readonly="readonly">
-                           </div>
-                        </div>
+                    
                  
                          <!-- 주소 API 스크립트 -->
                          <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -269,6 +262,8 @@ $(function(){
                            </div>
                          </div>
 
+							 <input type="hidden" name="cus_grade" id="cus_grade" value="👶씨앗회원">
+						
                      </li>
                   </ul>
                   <div class="px-3 px-sm-0 mb-4">

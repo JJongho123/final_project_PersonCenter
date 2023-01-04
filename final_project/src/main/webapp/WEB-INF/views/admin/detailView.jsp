@@ -57,6 +57,17 @@ margin-left:250px;
                               class="rounded-circle" style="width: 60px; height: 60px; margin-left:20px;">
 
                         </div>
+                        
+                           <div class="form-group row">
+                           <label class="col-sm-2 col-form-label" for="reg_mb_id">회원등급<strong
+                              class="sr-only">필수</strong></label>
+                           <div class="col-sm-6">
+                              <input type="text" name="cus_id" value="${customer.cus_grade}"
+                                 id="cus_id" required class="form-control required"
+                                 readonly="readonly">
+                           </div>
+                        
+                        </div>
 
                         <div class="form-group row">
                            <label class="col-sm-2 col-form-label" for="reg_mb_id">아이디<strong

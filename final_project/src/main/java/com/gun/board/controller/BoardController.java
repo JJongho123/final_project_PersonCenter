@@ -116,10 +116,24 @@ public class BoardController {
 		
 		cRepository.countUp(board_id);
 		
-		int cus_count = cRepository.checkCount(board_id);
+		int countCheck = cRepository.checkCount(board_id);
 		
-		cRepository.GradeUpdate(board_id,cus_count);
-		
+		if(countCheck > 0 && countCheck <= 2) {
+			int cus_count = 1;
+			cRepository.GradeUpdate(board_id,cus_count);
+		}
+		else if(countCheck > 2 && countCheck <= 4) {
+			int cus_count = 2;
+			cRepository.GradeUpdate(board_id,cus_count);
+		}
+		else if(countCheck > 4 && countCheck <= 6) {
+			int cus_count = 3;
+			cRepository.GradeUpdate(board_id,cus_count);
+		}
+		else {
+			int cus_count = 4;
+			cRepository.GradeUpdate(board_id,cus_count);
+		}
 		
 		// 회원등급제를 위한 메서드 추가 끝
 		
@@ -319,9 +333,9 @@ public class BoardController {
 
 	@RequestMapping(value = "/accept", method = RequestMethod.POST)
 	public @ResponseBody String accept(String friend_id, int board_num) {
-
+		
 		System.out.println("board_num : " + board_num);
-
+		
 		String cus_id = (String) session.getAttribute("loginid");
 		int result = fRepository.accept_2(cus_id, friend_id, board_num);
 		int numofFriendRequest = fRepository.numofFriendRequest(cus_id);

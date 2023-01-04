@@ -642,7 +642,7 @@
 					</c:if>
 					<!-- 위젯 시작 { -->
 					<h3 class="h3 f-lg en">
-						<a href="#"> <span class="float-right more-plus"></span> 공지글
+						<a href="#"  style="color:red;"> <span class="float-right more-plus"></span> 공지
 						</a>
 					</h3>
 					<hr class="hr" />
@@ -651,14 +651,14 @@
 						<ul class="na-list mt-n1">
 							<li class="px-3 px-sm-0"><c:forEach var="item"
 									items="${Notice_boards}">
-									<div class="na-title">
+									<div class="na-title" >
 										<div
 											class="float-right text-muted f-sm font-weight-normal ml-2">
 											<span class="sr-only">등록일</span>
 											<fmt:formatDate pattern="MM.dd" value="${item.board_no_date}" />
 										</div>
 										<div class="na-item">
-											<a
+											<a  style="color:red;"
 												href="${pageContext.request.contextPath}/notice/get?board_num=${item.board_num}&page=${page}"
 												class="na-subject"> ${item.board_no_title} </a>
 										</div>
