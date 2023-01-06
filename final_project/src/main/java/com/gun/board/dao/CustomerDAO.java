@@ -52,4 +52,14 @@ public interface CustomerDAO {
 
 	public String getcus_grade(String board_id)throws Exception;
 	
+	// 이메일 인증 관련
+	public int updateMailKey(Customer customer) throws Exception;
+	
+	public int updateMailAuth(Customer customer) throws Exception;
+	
+	public int emailAuthFail(String cus_id) throws Exception;
+	
+	
+	
+	
 }

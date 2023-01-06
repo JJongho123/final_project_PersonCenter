@@ -20,9 +20,39 @@ public class Customer {
    private int cus_count;
    private String cus_grade;
    
+   private String email;
+   private int mail_auth;
+   private String mail_key;
    
    
-   public int getCus_count() {
+   
+   
+   
+   public String getEmail() {
+	return email;
+}
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
+public int getMail_auth() {
+	return mail_auth;
+}
+
+public void setMail_auth(int mail_auth) {
+	this.mail_auth = mail_auth;
+}
+
+public String getMail_key() {
+	return mail_key;
+}
+
+public void setMail_key(String mail_key) {
+	this.mail_key = mail_key;
+}
+
+public int getCus_count() {
 	return cus_count;
 }
 
@@ -173,7 +203,8 @@ public String toString() {
 			+ ", cus_account=" + cus_account + ", cus_zip_code=" + cus_zip_code + ", cus_addr=" + cus_addr
 			+ ", cus_tel=" + cus_tel + ", cus_status=" + cus_status + ", friend_id=" + friend_id + ", friend_status="
 			+ friend_status + ", board_fileid=" + board_fileid + ", board_uploadfileid=" + board_uploadfileid
-			+ ", cus_count=" + cus_count + ", cus_grade=" + cus_grade + "]";
+			+ ", cus_count=" + cus_count + ", cus_grade=" + cus_grade + ", email=" + email + ", mail_auth=" + mail_auth
+			+ ", mail_key=" + mail_key + "]";
 }
 
 }

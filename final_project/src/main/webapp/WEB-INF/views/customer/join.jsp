@@ -172,6 +172,15 @@ $(function(){
                            
                         </div>
                         
+                      <div class="form-group row">
+                           <label class="col-sm-2 col-form-label" for="reg_mb_nick">이메일<strong
+                              class="sr-only">필수</strong></label>
+                           <div class="col-sm-4">
+                              <input type="text" name="email" id="email">
+                                
+                           </div>
+                         </div>
+                        
                         
                         <div class="form-group row">
                            <label class="col-sm-2 col-form-label">성별<strong

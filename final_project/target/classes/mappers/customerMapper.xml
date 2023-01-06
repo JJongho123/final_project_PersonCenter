@@ -135,6 +135,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select cus_grade from board_customer
 		where cus_id = #{board_id}
 	</select>
+	
+	<!-- 회원가입 시 이메일 인증을 위한 랜덤번호 저장 -->
+    <update id="updateMailKey" parameterType="Customer">
+        update board_customer set mail_key=#{mail_key} where email=#{email} and cus_id=#{cus_id}
+    </update>
+
+    <!-- 메일인증을 하면 mail_auth 컬럼을 기본값0에서 1로 바꿔 로그인을 허용 -->
+    <update id="updateMailAuth" parameterType="Customer">
+	    update board_customer set mail_auth=1 where email=#{email} and mail_key=#{mail_key}
+    </update>
+
+    <!-- 이메일 인증을 안했으면 0을 반환, 로그인 시 인증 했나 안했나 체크하기 위함 -->
+    <select id="emailAuthFail" parameterType="Customer" resultType="int">
+        select count(*) from board_customer where cus_id=#{cus_id} and mail_auth=1
+    </select>
+	
 </mapper>
 
 
