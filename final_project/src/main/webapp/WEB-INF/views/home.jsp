@@ -631,6 +631,8 @@
 								</div>
 								<div class="btn-group w-100" role="group"
 									aria-label="Member Menu">
+									<a href="${pageContext.request.contextPath}/customer/emailView"
+										class="btn btn-primary text-white" role="button"> 이메일 </a>
 									<a href="${pageContext.request.contextPath}/customer/vertify"
 										class="btn btn-primary text-white" role="button"> 내정보 </a> <a
 										href="${pageContext.request.contextPath}/customer/logout"
@@ -699,7 +701,7 @@
 
 					<!-- 위젯 시작 { -->
 					<h3 class="h3 f-lg en mb-1">
-						<a href="http://gukbbong.com/bbs/new.php?view=w"> <span
+						<a href="#"> <span
 							class="float-right more-plus"></span> 최근글
 						</a>
 					</h3>

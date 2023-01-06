@@ -49,6 +49,7 @@
                                           data : $("#deleteForm")
                                                 .serializeArray(),
                                           success : function(data) {
+                                        	  alert(data);
 
                                              if (data == 0) {
                                                 alert("비밀번호를 확인해주세요.");

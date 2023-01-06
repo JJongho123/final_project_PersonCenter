@@ -6,8 +6,11 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +18,15 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,15 +78,18 @@ public class CustomerController {
 
 	@Inject
 	FreeRepository frRepository;
-	
+
 	@Inject
 	DataRepository dRepository;
-	
+
 	@Inject
 	AuctionRepository aRepository;
-	
+
 	@Inject
 	UnionRepository uRepository;
+
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
 
 	Pagination Pagination = new Pagination();
 	Pagination_Free Paginationf = new Pagination_Free();
@@ -95,6 +107,13 @@ public class CustomerController {
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(Model model, Customer customer, MultipartFile upload) {
+
+		// 암호화 작업
+		String inputpasswd = customer.getCus_pw();
+		String encodeigpasswd = pwdEncoder.encode(inputpasswd);
+		customer.setCus_pw(encodeigpasswd);
+		logger.info(customer.getCus_pw());
+		// 암호화 작업 끝
 
 		cRepository.insertCustomer(customer);
 
@@ -125,12 +144,12 @@ public class CustomerController {
 		ArrayList<Free> free = frRepository.getFree_home();
 		free = Paginationf.totalPosts_home_free(free, page);
 		model.addAttribute("boards_free", free);
-		
+
 		// 정보게시판
 		ArrayList<Data> data = dRepository.getData_home();
 		data = Paginationd.totalPosts_home_data(data, page);
 		model.addAttribute("boards_data", data);
-		
+
 		// 경매게시판
 		ArrayList<Auction> auction = aRepository.getAuction_home();
 		auction = Paginationa.totalPosts_home(auction, page);
@@ -192,11 +211,13 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, HttpServletResponse response, Model model, Customer customer)
-			throws IOException {
+	public String login(Authentication authentication, HttpServletRequest request, HttpServletResponse response,
+			Model model, Customer customer) throws IOException {
+
 		Customer cusCompare = cRepository.selectCustomer(customer.getCus_id());
 
-		if (cusCompare == null || !cusCompare.getCus_pw().equals(customer.getCus_pw())) {
+		if (cusCompare == null || !pwdEncoder.matches(customer.getCus_pw(), cusCompare.getCus_pw())) {
+
 			response.setCharacterEncoding("EUC-KR");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script type='text/javascript'>");
@@ -241,22 +262,22 @@ public class CustomerController {
 			ArrayList<Free> free = frRepository.getFree_home();
 			free = Paginationf.totalPosts_home_free(free, page);
 			model.addAttribute("boards_free", free);
-			
+
 			// 정보게시판
 			ArrayList<Data> data = dRepository.getData_home();
 			data = Paginationd.totalPosts_home_data(data, page);
 			model.addAttribute("boards_data", data);
-			
+
 			// 경매게시판
 			ArrayList<Auction> auction = aRepository.getAuction_home();
 			auction = Paginationa.totalPosts_home(auction, page);
 			model.addAttribute("auction", auction);
-			
+
 			// 최신글뽑기위한 전체게시판 통합
 			ArrayList<Union> union = uRepository.getUnion_home();
 			union = Pagination.totalPosts_uhome(union, page);
 			model.addAttribute("union", union);
-		
+
 			return "home";
 		}
 	}
@@ -283,12 +304,12 @@ public class CustomerController {
 		ArrayList<Free> free = frRepository.getFree_home();
 		free = Paginationf.totalPosts_home_free(free, page);
 		model.addAttribute("boards_free", free);
-		
+
 		// 정보게시판
 		ArrayList<Data> data = dRepository.getData_home();
 		data = Paginationd.totalPosts_home_data(data, page);
 		model.addAttribute("boards_data", data);
-		
+
 		// 경매게시판
 		ArrayList<Auction> auction = aRepository.getAuction_home();
 		auction = Paginationa.totalPosts_home(auction, page);
@@ -319,7 +340,7 @@ public class CustomerController {
 	public String logout_login(HttpServletRequest request, HttpServletResponse response, Model model, Customer customer)
 			throws IOException {
 		Customer cusCompare = cRepository.selectCustomer(customer.getCus_id());
-		if (cusCompare == null || !cusCompare.getCus_pw().equals(customer.getCus_pw())) {
+		if (cusCompare == null || !pwdEncoder.matches(customer.getCus_pw(), cusCompare.getCus_pw())) {
 			response.setCharacterEncoding("EUC-KR");
 			PrintWriter writer = response.getWriter();
 			writer.println("<script type='text/javascript'>");
@@ -341,11 +362,10 @@ public class CustomerController {
 			session.setAttribute("numofReadMessage", numofReadMessage);
 			int numofSentMessage = mRepository.numofMessage(customer.getCus_id(), "sent");
 			session.setAttribute("numofSentMessage", numofSentMessage);
-
+			
 			Customer customer2 = cRepository.getPhoto(customer.getCus_id());
 			session.setAttribute("customer", customer2.getBoard_fileid());
-			
-		
+
 			// 거래글(6개)
 			int page = 1;
 			for (int i = 1; i < 7; i++) {
@@ -363,12 +383,12 @@ public class CustomerController {
 			ArrayList<Free> free = frRepository.getFree_home();
 			free = Paginationf.totalPosts_home_free(free, page);
 			model.addAttribute("boards_free", free);
-			
+
 			// 정보게시판
 			ArrayList<Data> data = dRepository.getData_home();
 			data = Paginationd.totalPosts_home_data(data, page);
 			model.addAttribute("boards_data", data);
-			
+
 			// 경매게시판
 			ArrayList<Auction> auction = aRepository.getAuction_home();
 			auction = Paginationa.totalPosts_home(auction, page);
@@ -395,6 +415,14 @@ public class CustomerController {
 	@RequestMapping(value = "/vertifyUpdate", method = RequestMethod.POST)
 	public String vertify_info(Model model, Customer customer, MultipartFile upload) {
 		logger.info("회원수정 완료 !!! ");
+
+		// 암호화 작업
+		String inputpasswd = customer.getCus_pw();
+		String encodeigpasswd = pwdEncoder.encode(inputpasswd);
+		customer.setCus_pw(encodeigpasswd);
+		
+		// 암호화 작업 끝
+
 		String cus_id = (String) session.getAttribute("loginid");
 		Customer originalBoard = cRepository.getPhoto(cus_id);
 		String board_fileid = "";
@@ -435,7 +463,7 @@ public class CustomerController {
 	// 회원 탈퇴 뷰로 이동
 	@RequestMapping(value = "/withdrawalView", method = RequestMethod.GET)
 	public String withdrawal_info(Customer customer, Model model) {
-		String cus_id = (String) session.getAttribute("loginid");
+		
 
 		logger.info("회원 탈퇴 뷰 페이지 이동 컨트롤러  !!! ");
 		return "customer/withdrawalView";
@@ -458,11 +486,88 @@ public class CustomerController {
 	@ResponseBody
 	@RequestMapping(value = "/passChk", method = RequestMethod.POST)
 	public int passChk(Customer customer) throws Exception {
+		
 
-		int result = cRepository.passChk(customer);
-		System.out.println("passChk 컨트롤러 result 값 !! : " + result);
-		return result;
+		Customer cusCompare = cRepository.selectCustomer(customer.getCus_id());
+		
+
+		int result = 0;
+		if (pwdEncoder.matches(customer.getCus_pw(), cusCompare.getCus_pw())) {
+			result = 1;
+			return result;
+
+		} else {
+			result = 0;
+			return result;
+		}
+
 	}
+	@RequestMapping(value = "/emailView", method = RequestMethod.GET)
+	public String email(Customer customer, Model model) {
+		
+
+		logger.info("이메일 뷰 페이지 이동 컨트롤러  !!! ");
+		return "customer/email";
+	}
+	
+	
+	// 이메일 인증
+	@GetMapping("/mailCheck")
+	@ResponseBody
+	public String mailCheck(String email) {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		return joinEmail(email);
+	}
+	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+	private int authNumber; 
+	// 난수 발생(여러분들 맘대러)
+	
+		public void makeRandomNumber() {
+			// 난수의 범위 111111 ~ 999999 (6자리 난수)
+			Random r = new Random();
+			int checkNum = r.nextInt(888888) + 111111;
+			System.out.println("인증번호 : " + checkNum);
+			authNumber = checkNum;
+		}
+		
+		
+				//이메일 보낼 양식! 
+		public String joinEmail(String email) {
+			makeRandomNumber();
+			String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
+			String toMail = email;
+			String title = "회원 가입 인증 이메일 입니다."; // 이메일 제목 
+			String content = 
+					"홈페이지를 방문해주셔서 감사합니다." + 	//html 형식으로 작성 ! 
+	                "<br><br>" + 
+				    "인증 번호는 " + authNumber + "입니다." + 
+				    "<br>" + 
+				    "해당 인증번호를 인증번호 확인란에 기입하여 주세요."; //이메일 내용 삽입
+			mailSend(setFrom, toMail, title, content);
+			return Integer.toString(authNumber);
+		}
+		
+		//이메일 전송 메소드
+		public void mailSend(String setFrom, String toMail, String title, String content) { 
+			MimeMessage message = mailSender.createMimeMessage();
+			// true 매개값을 전달하면 multipart 형식의 메세지 전달이 가능.문자 인코딩 설정도 가능하다.
+			try {
+				MimeMessageHelper helper = new MimeMessageHelper(message,true,"utf-8");
+				helper.setFrom(setFrom);
+				helper.setTo(toMail);
+				helper.setSubject(title);
+				// true 전달 > html 형식으로 전송 , 작성하지 않으면 단순 텍스트로 전달.
+				helper.setText(content,true);
+				mailSender.send(message);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	
 
 	// 마지막 닫는괄호
 }
