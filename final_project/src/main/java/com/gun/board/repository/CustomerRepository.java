@@ -218,43 +218,25 @@ public class CustomerRepository {
 		}
 		return cus_grade;
 	}
-	
-	// 이메일 인증
-	
-	public int updateMailKey(Customer customer) {
-		int result = 0;
-		cdao = sqlSession.getMapper(CustomerDAO.class);
+
+	// 임시비밀번호로 업데이트
+	public void temporaryPassword(int authNumber, String cus_id) {
+	cdao = sqlSession.getMapper(CustomerDAO.class);
+		
+		Map<String, Object> temporary = new HashMap();
+		
+		temporary.put("cus_pw", authNumber);
+		temporary.put("cus_id", cus_id);
+		
 		try {
-			result = cdao.updateMailKey(customer);
+		
+			cdao.temporaryPassword(temporary);
+			
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-		return result;
-	}
-	
-	public int updateMailAuth(Customer customer) {
-		int result = 0;
-		cdao = sqlSession.getMapper(CustomerDAO.class);
-		try {
-			result = cdao.updateMailAuth(customer);
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	public int emailAuthFail(String cus_id) {
-		int result = 0;
-		cdao = sqlSession.getMapper(CustomerDAO.class);
-		try {
-			result = cdao.emailAuthFail(cus_id);
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-		return result;
+		
 	}
 
 }

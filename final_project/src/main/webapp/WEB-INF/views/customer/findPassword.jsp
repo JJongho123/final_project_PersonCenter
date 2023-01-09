@@ -22,14 +22,15 @@
 						"cus_question" : $("#cus_question").val(),
 						"cus_answer" : $("#cus_answer").val()
 					},
-					success : function(password) {
-						if (password != 'false') {
-
-							alert("비밀번호는  " + password
-									+ "  입니다. 다시 로그인 해주세요");
+					success : function(email) {
+						if (email != 'false') {
+							
+							alert("가입한 이메일로 임시비밀번호를 보냈습니다.\n"
+									+"이메일 확인후 다시 로그인해주세요.\n"
+									+"이메일 : "+email);
 							window.close();
-						} else if (password == 'false') {
-							alert("비밀번호와 답변을 다시 확인해주세요");
+						} else if (email == 'false') {
+							alert("질문과 답변을 다시 확인해주세요");
 						}
 					}
 				});

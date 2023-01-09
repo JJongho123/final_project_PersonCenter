@@ -110,59 +110,39 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	
 	<!-- 이메일 인증번호 체크 -->
 	<script>
+	
+	$(function() {
 
-	$(document)
-			.ready(
-					function() {
+		$('#emailCheck_num')
+				.keyup(
+						function() {
+							let emailCheck_num = $('#emailCheck_num').val();
 
-						let cus_pw = $('#cus_id').val();
+							$
+									.ajax({
+										type : "post",
+										url : "${pageContext.request.contextPath}/customer/emailCheck_num",
+										data : {
+											"emailCheck_num" : emailCheck_num
+										},
+										dataType : "json",
 
-						$("#btn_submit")
-								.on(
-										"click",
-										function() {
-
-											if ($("#emailCheck_num").val() == "") {
-												alert("인증번호를 입력해주세요");
-												$("#emailCheck_num").focus();
-												return false
+										success : function(result) {
+											if (result == 1) {
+												$("#emailnum_check").html(
+														'인증번호를 확인해주세요.');
+												$("#emailnum_check").attr('color',
+														'#dc3545');
+											} else {
+												$("#emailnum_check").html(
+														'인증번호가 맞습니다.');
+												$("#emailnum_check").attr('color',
+														'#2fb380');
 											}
-
-
-											$
-													.ajax({
-														url : "${pageContext.request.contextPath}/customer/emailCheck_num",
-														type : "POST",
-														dataType : "json",
-														data :
-															$("#joinForm")
-															.serializeArray(),
-														success : function(data) {
-															
-
-															if (data == 1) {
-																$("#joinForm").submit();
-																
-															} else {
-																alert("인증번호를 확인해주세요.");
-																return;
-															}
-														},
-														error : function(
-																request,
-																status, error) {
-
-															alert("status : "
-																	+ request.status
-																	+ ", message : "
-																	+ request.responseText
-																	+ ", error : "
-																	+ error);
-															alert("요청실패");
-														}
-													})
-										});
-					});
+										}
+									});
+						});
+	});
 
 	</script>
 	
@@ -283,7 +263,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 									<div class="col-sm-4">
 										<input type="number" name="emailCheck_num" id="emailCheck_num" 
 											class="form-control" required>
+											
+										<font id="emailnum_check" size="2"></font>
 									</div>
+								
 									
 								</div>
 
@@ -389,7 +372,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<div class="px-3 px-sm-0 mb-4">
 							<div class="row mx-n2">
 								<div class="col-6 order-2 px-2">
-									<button type="button" id="btn_submit" name="btn_submit"
+									<button type="submit" id="btn_submit" name="btn_submit"
 										class="btn btn-primary btn-lg btn-block en">회원가입</button>
 								</div>
 

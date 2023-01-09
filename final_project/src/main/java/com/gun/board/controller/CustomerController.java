@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -108,13 +109,7 @@ public class CustomerController {
 		return "customer/join";
 	}
 
-//	@RequestMapping(value = "/join", method = RequestMethod.GET)
-//	public String emailConfirm(Customer customer)throws Exception{
-//		cRepository.updateMailAuth(customer);
-//		
-//		return "home";
-//	}
-
+	// 인증번호 난수생성
 	public void makeRandomNumber() {
 		// 난수의 범위 111111 ~ 999999 (6자리 난수)
 		Random r = new Random();
@@ -124,18 +119,17 @@ public class CustomerController {
 
 	}
 
+	// 이메일 인증번호 체크
 	@RequestMapping(value = "/emailCheck_num", method = RequestMethod.POST)
 	public @ResponseBody int emailCheck_num(int emailCheck_num) {
-		
-		System.out.println("emailCheck_num 도달@@ emailCheck_num : " + emailCheck_num);
-		System.out.println("authNumber : " + authNumber);
+	
 
 		int result = 0;
 
 		if (emailCheck_num == authNumber) {
-			result = 1;
-		} else {
 			result = 0;
+		} else {
+			result = 1;
 		}
 
 		return result;
@@ -143,32 +137,23 @@ public class CustomerController {
 
 
 
-	// 이메일인증
+	// 이메일보내기
 	@RequestMapping(value = "/emailSend", method = RequestMethod.POST)
 	public String join(Model model, Customer customer) throws Exception {
 
-		// customer.setEmail(email);
+	
 		makeRandomNumber();
-
-//		String mail_key = new TempKey().getKey(30, false);
-//		customer.setMail_key(mail_key);
-
-//		cRepository.updateMailAuth(customer);
-//		cRepository.updateMailKey(customer);
 
 		System.out.println("customer.getEmail() : " + customer.getEmail());
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("인증메일입니다");
-		sendMail.setText("<h1>인증 번호는 " + authNumber + "입니다.</h1>" + "<br><h3> 해당 인증번호를 인증번호 확인란에 기입하여 주세요.</h3>");
-		sendMail.setFrom("jjh33534@gmail.com", "JJH");
+		sendMail.setText("<h1>인증 번호는 [ " + authNumber + " ] 입니다.</h1>" + "<br><h3> 해당 인증번호를 인증번호 확인란에 기입하여 주세요.</h3>");
+		sendMail.setFrom("jjh33534@gmail.com", "관리자");
 		sendMail.setTo(customer.getEmail());
 		sendMail.send();
 		
-		model.addAttribute("authNumber " + authNumber);
-
 		return "customer/join";
 
-		// 이메일 끝
 	}
 
 	@RequestMapping(value = "/joinCustomer", method = RequestMethod.POST)
@@ -182,8 +167,6 @@ public class CustomerController {
 		// 암호화 작업 끝
 
 		cRepository.insertCustomer(customer);
-
-		System.out.println("upload  : " + upload);
 
 		if (!upload.isEmpty()) {
 			System.out.println("upload file's name: " + upload.getOriginalFilename());
@@ -392,12 +375,37 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/findPassword", method = RequestMethod.POST)
-	public @ResponseBody String findPassword(Customer customer) {
-		String password = cRepository.findPassword(customer);
-		if (password == null) {
+	public @ResponseBody String findPassword(Customer customer) throws Exception {
+		
+		Customer cusCompare = cRepository.selectCustomer(customer.getCus_id());
+		
+		String email = cRepository.findPassword(customer);
+		
+		//암호화
+//		String inputpasswd = Integer.toString(authNumber);
+//		String encodeigpasswd = pwdEncoder.encode(inputpasswd);
+		
+		
+		
+		
+		if (email == null) {
 			return "false";
 		} else {
-			return password;
+			
+			makeRandomNumber();
+
+			System.out.println("customer.getEmail() : " + cusCompare.getEmail());
+			MailHandler sendMail = new MailHandler(mailSender);
+			sendMail.setSubject("인증메일입니다");
+			sendMail.setText("<h1>임시 비밀번호는 [ " + authNumber + " ] 입니다.</h1>" + "<br><h3> 임시 비밀번호로 로그인 해주세요.</h3>");
+			sendMail.setFrom("jjh33534@gmail.com", "관리자");
+			sendMail.setTo(cusCompare.getEmail());
+			sendMail.send();
+			
+			// 이메일로 보낸 임시 비밀번호 업데이트 메서드
+			cRepository.temporaryPassword(authNumber,customer.getCus_id());
+			
+			return email;
 		}
 	}
 
