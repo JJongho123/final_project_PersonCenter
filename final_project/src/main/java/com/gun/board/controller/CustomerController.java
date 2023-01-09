@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.servlet.ServletOutputStream;
@@ -98,6 +99,8 @@ public class CustomerController {
 
 	@Inject
 	HttpSession session;
+	
+	private int authNumber ;
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -111,11 +114,26 @@ public class CustomerController {
 //		
 //		return "home";
 //	}
+	
+	public void makeRandomNumber() {
+		// 난수의 범위 111111 ~ 999999 (6자리 난수)
+		Random r = new Random();
+		int checkNum = r.nextInt(888888) + 111111;
+		System.out.println("인증번호 : " + checkNum);
+		authNumber = checkNum;
+		
+	}
+	
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(Model model, Customer customer, MultipartFile upload)throws Exception {
-
-		//랜덤 문자열을 생성해서 mail_key 컬럼에 넣어주기(이메일인증)
+		
+		
+		// 이메일인증
+		makeRandomNumber();
+		
+		cRepository.updateMailAuth(customer);
+		
         String mail_key = new TempKey().getKey(30,false);
         customer.setMail_key(mail_key);
 
@@ -126,9 +144,8 @@ public class CustomerController {
         sendMail.setText(
         		"<h1>메일인증</h1>" +
         		"<br>아래 [이메일 인증 확인]을 눌러주세요."+
-        		"<br><a href='http://localhost:8080/board/customer/registerEmail?email="+customer.getEmail()+
-        		"&mail_key="+mail_key+"' target='_blank>이메일 인증 확인</a>");
-        		sendMail.setFrom("whdgh33534@gmail.com","JJH");
+        		"<br><h1>인증 번호는 "+authNumber+"입니다.</h1>");
+        		sendMail.setFrom("jjh33534@gmail.com","JJH");
         		sendMail.setTo(customer.getEmail());
         		sendMail.send();
         
