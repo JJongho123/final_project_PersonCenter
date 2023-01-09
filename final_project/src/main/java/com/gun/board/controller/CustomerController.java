@@ -88,7 +88,7 @@ public class CustomerController {
 
 	@Inject
 	BCryptPasswordEncoder pwdEncoder;
-	
+
 	@Autowired
 	JavaMailSender mailSender;
 
@@ -99,58 +99,81 @@ public class CustomerController {
 
 	@Inject
 	HttpSession session;
-	
-	private int authNumber ;
+
+	private int authNumber;
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String home(Model model) {
 		logger.info("회원가입");
 		return "customer/join";
 	}
-	
+
 //	@RequestMapping(value = "/join", method = RequestMethod.GET)
 //	public String emailConfirm(Customer customer)throws Exception{
 //		cRepository.updateMailAuth(customer);
 //		
 //		return "home";
 //	}
-	
+
 	public void makeRandomNumber() {
 		// 난수의 범위 111111 ~ 999999 (6자리 난수)
 		Random r = new Random();
 		int checkNum = r.nextInt(888888) + 111111;
 		System.out.println("인증번호 : " + checkNum);
 		authNumber = checkNum;
-		
+
 	}
-	
 
-	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(Model model, Customer customer, MultipartFile upload)throws Exception {
+	@RequestMapping(value = "/emailCheck_num", method = RequestMethod.POST)
+	public @ResponseBody int emailCheck_num(int emailCheck_num) {
 		
-		
-		// 이메일인증
+		System.out.println("emailCheck_num 도달@@ emailCheck_num : " + emailCheck_num);
+		System.out.println("authNumber : " + authNumber);
+
+		int result = 0;
+
+		if (emailCheck_num == authNumber) {
+			result = 1;
+		} else {
+			result = 0;
+		}
+
+		return result;
+	}
+
+
+
+	// 이메일인증
+	@RequestMapping(value = "/emailSend", method = RequestMethod.POST)
+	public String join(Model model, Customer customer) throws Exception {
+
+		// customer.setEmail(email);
 		makeRandomNumber();
-		
-		cRepository.updateMailAuth(customer);
-		
-        String mail_key = new TempKey().getKey(30,false);
-        customer.setMail_key(mail_key);
 
-        cRepository.updateMailKey(customer);
-        System.out.println("customer.getEmail() : " + customer.getEmail());
-        MailHandler sendMail = new MailHandler(mailSender);
-        sendMail.setSubject("인증메일입니다");
-        sendMail.setText(
-        		"<h1>메일인증</h1>" +
-        		"<br>아래 [이메일 인증 확인]을 눌러주세요."+
-        		"<br><h1>인증 번호는 "+authNumber+"입니다.</h1>");
-        		sendMail.setFrom("jjh33534@gmail.com","JJH");
-        		sendMail.setTo(customer.getEmail());
-        		sendMail.send();
-        
-        // 이메일 끝
-        
+//		String mail_key = new TempKey().getKey(30, false);
+//		customer.setMail_key(mail_key);
+
+//		cRepository.updateMailAuth(customer);
+//		cRepository.updateMailKey(customer);
+
+		System.out.println("customer.getEmail() : " + customer.getEmail());
+		MailHandler sendMail = new MailHandler(mailSender);
+		sendMail.setSubject("인증메일입니다");
+		sendMail.setText("<h1>인증 번호는 " + authNumber + "입니다.</h1>" + "<br><h3> 해당 인증번호를 인증번호 확인란에 기입하여 주세요.</h3>");
+		sendMail.setFrom("jjh33534@gmail.com", "JJH");
+		sendMail.setTo(customer.getEmail());
+		sendMail.send();
+		
+		model.addAttribute("authNumber " + authNumber);
+
+		return "customer/join";
+
+		// 이메일 끝
+	}
+
+	@RequestMapping(value = "/joinCustomer", method = RequestMethod.POST)
+	public String join(Model model, Customer customer, MultipartFile upload) throws Exception {
+
 		// 암호화 작업
 		String inputpasswd = customer.getCus_pw();
 		String encodeigpasswd = pwdEncoder.encode(inputpasswd);
@@ -405,7 +428,7 @@ public class CustomerController {
 			session.setAttribute("numofReadMessage", numofReadMessage);
 			int numofSentMessage = mRepository.numofMessage(customer.getCus_id(), "sent");
 			session.setAttribute("numofSentMessage", numofSentMessage);
-			
+
 			Customer customer2 = cRepository.getPhoto(customer.getCus_id());
 			session.setAttribute("customer", customer2.getBoard_fileid());
 
@@ -463,7 +486,7 @@ public class CustomerController {
 		String inputpasswd = customer.getCus_pw();
 		String encodeigpasswd = pwdEncoder.encode(inputpasswd);
 		customer.setCus_pw(encodeigpasswd);
-		
+
 		// 암호화 작업 끝
 
 		String cus_id = (String) session.getAttribute("loginid");
@@ -506,7 +529,6 @@ public class CustomerController {
 	// 회원 탈퇴 뷰로 이동
 	@RequestMapping(value = "/withdrawalView", method = RequestMethod.GET)
 	public String withdrawal_info(Customer customer, Model model) {
-		
 
 		logger.info("회원 탈퇴 뷰 페이지 이동 컨트롤러  !!! ");
 		return "customer/withdrawalView";
@@ -521,7 +543,7 @@ public class CustomerController {
 		session.invalidate();
 
 		logger.info("회원 탈퇴 컨트롤러 !! @@ : ");
-
+		
 		return "home";
 	}
 
@@ -529,10 +551,8 @@ public class CustomerController {
 	@ResponseBody
 	@RequestMapping(value = "/passChk", method = RequestMethod.POST)
 	public int passChk(Customer customer) throws Exception {
-		
 
 		Customer cusCompare = cRepository.selectCustomer(customer.getCus_id());
-		
 
 		int result = 0;
 		if (pwdEncoder.matches(customer.getCus_pw(), cusCompare.getCus_pw())) {
@@ -545,74 +565,14 @@ public class CustomerController {
 		}
 
 	}
-	
+
 	// 이메일인증
 	@RequestMapping(value = "/emailView", method = RequestMethod.GET)
 	public String email(Customer customer, Model model) {
-		
 
 		logger.info("이메일 뷰 페이지 이동 컨트롤러  !!! ");
 		return "customer/email";
 	}
-
-//	
-//	// 이메일 인증
-//	@GetMapping("/mailCheck")
-//	@ResponseBody
-//	public String mailCheck(String email) {
-//		System.out.println("이메일 인증 요청이 들어옴!");
-//		System.out.println("이메일 인증 이메일 : " + email);
-//		return joinEmail(email);
-//	}
-//	
-//	@Autowired
-//	private JavaMailSenderImpl mailSender;
-//	private int authNumber; 
-//	// 난수 발생(여러분들 맘대러)
-//	
-//		public void makeRandomNumber() {
-//			// 난수의 범위 111111 ~ 999999 (6자리 난수)
-//			Random r = new Random();
-//			int checkNum = r.nextInt(888888) + 111111;
-//			System.out.println("인증번호 : " + checkNum);
-//			authNumber = checkNum;
-//		}
-//		
-//		
-//				//이메일 보낼 양식! 
-//		public String joinEmail(String email) {
-//			makeRandomNumber();
-//			String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
-//			String toMail = email;
-//			String title = "회원 가입 인증 이메일 입니다."; // 이메일 제목 
-//			String content = 
-//					"홈페이지를 방문해주셔서 감사합니다." + 	//html 형식으로 작성 ! 
-//	                "<br><br>" + 
-//				    "인증 번호는 " + authNumber + "입니다." + 
-//				    "<br>" + 
-//				    "해당 인증번호를 인증번호 확인란에 기입하여 주세요."; //이메일 내용 삽입
-//			mailSend(setFrom, toMail, title, content);
-//			return Integer.toString(authNumber);
-//		}
-//		
-//		//이메일 전송 메소드
-//		public void mailSend(String setFrom, String toMail, String title, String content) { 
-//			MimeMessage message = mailSender.createMimeMessage();
-//			// true 매개값을 전달하면 multipart 형식의 메세지 전달이 가능.문자 인코딩 설정도 가능하다.
-//			try {
-//				MimeMessageHelper helper = new MimeMessageHelper(message,true,"utf-8");
-//				helper.setFrom(setFrom);
-//				helper.setTo(toMail);
-//				helper.setSubject(title);
-//				// true 전달 > html 형식으로 전송 , 작성하지 않으면 단순 텍스트로 전달.
-//				helper.setText(content,true);
-//				mailSender.send(message);
-//			} catch (MessagingException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//	
 
 	// 마지막 닫는괄호
 }
