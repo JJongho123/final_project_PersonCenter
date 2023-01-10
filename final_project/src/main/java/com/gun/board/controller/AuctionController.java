@@ -462,11 +462,11 @@ public class AuctionController {
 	      return "boards_auction/a_home";
 	   }
 	   
-	   // �옄�쑀寃뚯떆�뙋 �젙�젹
+	   
 	   @RequestMapping(value ="/SortAuction", method = RequestMethod.GET)
 	   public  String SortAuction(String sortValue, Model model) {   
 	 
-	      System.out.println("�옄�쑀寃뚯떆�뙋 �젙�젹 �릱�굹~?~!? @@ sortValue : " + sortValue);
+	  
 	      ArrayList<Auction> auction = aRepository.getSort(sortValue);
 	      
 	      int page = 1;

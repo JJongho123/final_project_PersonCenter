@@ -8,9 +8,7 @@ import com.gun.board.vo.Message;
 import com.gun.board.vo.Union;
 
 public class Pagination {
-	// ����¡ó�� ���� Ŭ����
 
-	// Ȩ�� ��Ÿ�� �Խù�(7���� �ڸ� ��)
 	public ArrayList<Board> totalPosts_home(ArrayList<Board> boards, int page) {
 		ArrayList<Board> result = new ArrayList();
 		int startPost = (page - 1) * Configuration.POSTS_HOME;
@@ -24,7 +22,7 @@ public class Pagination {
 		return result;
 	}
 
-	// �� ������ ���
+
 	public int totalPages(ArrayList<Board> boards) {
 		int result = 0;
 		result = (boards.size() / Configuration.POSTS);
@@ -43,7 +41,7 @@ public class Pagination {
 		return result;
 	}
 
-	// ������ ������ ���ϱ�
+
 	public int endPage(int page, int totalPages) {
 		int endPage = 0;
 		endPage = page + Configuration.PAGES;
@@ -53,7 +51,7 @@ public class Pagination {
 		return endPage;
 	}
 
-	// �� �������� ��Ÿ���� �Խñ�
+	
 	public ArrayList<Board> totalPosts(ArrayList<Board> boards, int page) {
 		ArrayList<Board> result = new ArrayList();
 		int startPost = (page - 1) * Configuration.POSTS;
@@ -80,7 +78,7 @@ public class Pagination {
 		return result;
 	}
 
-	// ������ �� ����
+	
 	public int getCurrentPage(int page, int totalPages) {
 		if (page <= 0) {
 			page = 1;
@@ -90,7 +88,7 @@ public class Pagination {
 		return page;
 	}
 
-	// ������ ������ ���������̼� �߰��Ȱ�
+	
 	public static int cus_totalPages(ArrayList<Customer> customers) {
 		int result = 0;
 		result = (customers.size() / Configuration.POSTS);

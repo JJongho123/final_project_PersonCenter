@@ -132,26 +132,17 @@ public class FreeController {
       String loginid = (String) session.getAttribute("loginid");
       Free free = frRepository.getBoards_free(board_num);
       if (!loginid.equals(free.getBoard_id())) {
-         /// �옉�꽦�옄�뒗 �옄�떊�씠 �옉�꽦�븳 湲��쓽 議고쉶�닔瑜� �삱由ъ� 紐삵븳�떎
+     
          frRepository.upHits_free(board_num);
          free = frRepository.getBoards_free(board_num);
       }
-      
-		/* Board�뿉 �엳�뼱�꽌 �씪�떒 媛��졇�솕吏�留� �닔�젙�룄 �븯吏� �븡怨� �씪�떒 二쇱꽍.
-		 * String seller = bRepository.getBoard_id(board_num); String status =
-		 * fRepository.getStatus(loginid, seller);
-		 * 
-		 * if (status == null || !status.equals("friend")) {
-		 * session.setAttribute("agree", "failed"); } else if (status.equals("friend"))
-		 * { session.setAttribute("agree", "successed"); }
-		 */
-      
+  
       model.addAttribute("free", free);
       model.addAttribute("page", page);
       model.addAttribute("friend_id", friend_id);
-      logger.info("湲��씫湲�" + free);
+     
 
-    //由ы뵆�씪�씠 遺�遺�
+ 
       ArrayList<Reply_Free> reply = rRepository.getReplies(board_num);
       model.addAttribute("reply", reply);
       return "boards_free/get";
@@ -210,11 +201,11 @@ public class FreeController {
       Reply_Free reply = rRepository.getReply(reply_num);
       int result = 0;
       if (reply_num == -1) {
-    	// �썝 �뙎湲��씤 寃쎌슦
+    
          newReply.setReply_id(reply_Id);
          newReply.setReply_nickname(reply_Nickname);
       } else {
-    	// ���뙎湲��씤 寃쎌슦
+    
          newReply.setReply_id(reply.getReply_id());
          newReply.setReply_nickname(reply.getReply_nickname());
          newReply.setRreply_id(reply_Id);
@@ -222,24 +213,24 @@ public class FreeController {
          newReply.setRreply_num(reply_num);
       }
       result = rRepository.insertReply(newReply);
-      // �썝�뙎湲��씪 寃쎌슦 rreply num 異붽�濡� �꽔�뼱二쇨린
+ 
       if (reply_num == -1) {
          reply_num = rRepository.recentlyAddedReplynum();
-         logger.info("理쒓렐�뿉 �벑濡앺븳 �뙎湲� 踰덊샇 : " + reply_num);
+        
          rRepository.updateRReply_num(reply_num);
       }
-      // 0 : �뙎湲�異붽�
+ 
       frRepository.changeReply_free(board_num, 0);
-      logger.info("�뙎湲� �옉�꽦 寃곌낵 : " + result);
+    
       return board_num;
    }
 
    @RequestMapping(value = "/deleteReply", method = RequestMethod.POST)
    public @ResponseBody int deleteReply(int reply_num, int board_num) {
       int result = rRepository.deleteReply(reply_num);
-      // 1 : �뙎湲� �궘�젣
+     
       frRepository.changeReply_free(board_num, 1);
-      logger.info("�뙎湲� �궘�젣 寃곌낵 : " + result);
+ 
       return board_num;
    }
 
@@ -248,7 +239,7 @@ public class FreeController {
 	   Reply_Free reply = rRepository.getReply(reply_num);
       reply.setReply_content(reply_content);
       int result = rRepository.updateReply(reply);
-      logger.info("�뙎湲� �닔�젙");
+   
       return board_num;
    }
 
@@ -260,7 +251,7 @@ public class FreeController {
          fileDeleteResult = FileService.deleteFile(Configuration.PHOTOPATH + "/" + free.getBoard_uploadfileid());
       }
       int result = frRepository.deleteBoards_free(board_num);
-      logger.info("湲� �궘�젣 : " + result + " , " + fileDeleteResult);
+    
       return result;
    }
 
@@ -274,7 +265,7 @@ public class FreeController {
       model.addAttribute("page", page);
       model.addAttribute("friend_id", friend_id);
       if (free.getBoard_id().equals(loginid)) {
-    	// 湲��벖�궗�엺�씠�옉 濡쒓렇�씤�븳 �궗�엺�씠 媛숈쓣 �븣留� �뾽�럠�씠 媛��뒫�븯寃�
+  
          model.addAttribute("free", free);
          return "boards_free/update";
       }
@@ -304,7 +295,7 @@ public class FreeController {
          free.setBoard_uploadfileid(board_uploadfileid);
       }
       int result = frRepository.updateBoards_free(free);
-      logger.info("湲� �닔�젙 寃곌낵 : " + free.toString());
+     
       ArrayList<Free> boards_free = frRepository.getFree(friend_id);
       int totalPages = Paginationfr.totalPages(boards_free);
       page = Paginationfr.getCurrentPage(page, totalPages);
@@ -320,7 +311,7 @@ public class FreeController {
    @RequestMapping(value = "home", method = RequestMethod.GET)
    public String gethome(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
          @RequestParam(value = "friend_id", defaultValue = "") String friend_id) {
-      logger.info("寃뚯떆�뙋 �솃");
+   
       String cus_id = (String) session.getAttribute("loginid");
       if (friend_id.equals("") || friend_id.equals(cus_id)) {
          friend_id = cus_id;
@@ -339,8 +330,7 @@ public class FreeController {
       page = Paginationfr.getCurrentPage(page, totalPages);
       free = Paginationfr.totalPosts(free, page);
       int endPage = Paginationfr.endPage(page, totalPages);
-      logger.info("珥� �럹�씠吏� : " + totalPages + ", �걹 �럹�씠吏� :  " + endPage + "�쁽�옱�럹�씠吏� :  " + page + "寃뚯떆臾� �닔 : " + free.size()
-            + " status: " + (String) session.getAttribute("status"));
+ 
       model.addAttribute("free", free);
       model.addAttribute("page", page);
       model.addAttribute("endPage", endPage);
@@ -378,7 +368,6 @@ public class FreeController {
    @RequestMapping(value ="/SortFree", method = RequestMethod.GET)
    public  String SortFree(String sortValue, Model model) {   
  
-      System.out.println("�옄�쑀寃뚯떆�뙋 �젙�젹 �릱�굹~?~!? @@ sortValue : " + sortValue);
       ArrayList<Free> free = frRepository.getSort(sortValue);
       
       int page = 1;

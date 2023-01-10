@@ -1,25 +1,23 @@
 package com.gun.board.vo;
 
 public class Reply_Free {
-	// ���
 
-	// ����� ���� �Խñ� ��ȣ
 	private int board_num;
-	// ����� ���� ��ȣ
+	
 	private int reply_num;
-	// ��� �ۼ��� ���̵�
+	
 	private String reply_id;
-	// ��� ����
+
 	private String reply_content;
-	// ��� �ۼ� �ð�
+	
 	private String reply_date;
-	// ��� �ۼ��� �г���
+	
 	private String reply_nickname;
-	// ���� �ۼ��� ���̵�
+	
 	private String rreply_id;
-	// ���� �ۼ��� �г���
+	
 	private String rreply_nickname;
-	// ������ ���� ��� ��ȣ
+	
 	private int rreply_num;
 
 	public int getRreply_num() {

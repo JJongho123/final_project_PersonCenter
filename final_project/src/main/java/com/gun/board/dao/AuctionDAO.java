@@ -8,7 +8,7 @@ import com.gun.board.vo.Free;
 
 public interface AuctionDAO {
 
-	// �ŷ��Խ������� �߰�
+	
 	public ArrayList<Auction> getTransaction_0(int transaction_name) throws Exception;
 
 	public ArrayList<Auction> getTransaction(int transaction_name) throws Exception;

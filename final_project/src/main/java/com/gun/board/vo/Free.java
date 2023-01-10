@@ -4,29 +4,27 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Free {
-	// �Խ���
-
-	// �Խ��� ���� ��ȣ
+	
 	private int board_num;
-	// ����
+	
 	private String board_title;
-	// ����
+	
 	private String board_content;
-	// �ۼ� ��¥
+	
 	private Date board_date;
-	// ���̵�
+	
 	private String board_id;
-	// ��ȸ��
+	
 	private int board_hits;
-	// �г���
+	
 	private String board_nickname;
-	// ��� ��
+
 	private int board_replies;
-	// ���� ����
+	
 	private String board_see;
-	// ���� ���� �̸�
+	
 	private String board_fileid;
-	// ����Ǵ� ���� �̸�
+	
 	private String board_uploadfileid;
 
 	public String getBoard_fileid() {

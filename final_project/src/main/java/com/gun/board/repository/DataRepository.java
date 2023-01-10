@@ -82,7 +82,7 @@ public class DataRepository {
 	}
 
 	public void upHits_data(int board_num) {
-		// 議고쉶�닔 �삱由ш린
+		
 		ddao = sqlSession.getMapper(DataDAO.class);
 		try {
 			ddao.upHits_data(board_num);

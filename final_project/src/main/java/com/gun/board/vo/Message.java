@@ -3,28 +3,28 @@ package com.gun.board.vo;
 import java.util.Date;
 
 public class Message {
-	// ��ȣ
+
 	private int message_num;
 
-	// ����
+
 	private String cus_id;
 
-	// ����
+	
 	private String friend_id;
 
-	// ����
+	
 	private String message_title;
 
-	// ����
+	
 	private String message;
 
-	// ����->���� ������ ��
+	
 	private String cus_status;
 
-	// ������ ����->Ȯ���ߴ��� ���� Ȯ�� ���ߴ���
+	
 	private String friend_status;
 
-	// ���� ��¥
+
 	private Date message_date;
 	
 	private int board_num;

@@ -92,24 +92,24 @@
 					
 					<!-- 카테고리 시작 -->
 				<div id="bo_cate_list" class="sly-wrap flex-grow-1"
-                  style="overflow: hidden;">
+                  style="overflow: hidden; margin-left:200px;">
                   <ul id="bo_cate_ul"
                      class="sly-list d-flex border-left-0 text-nowrap"
                      style="transform: translateZ(0px); width: 671px; min-width: 681px;">
                      <li class="active"><a class="py-2 px-3"
                         href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=0">전체</a></li>
                      <li><a class="py-2 px-3"
-                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=1">게시판1</a></li>
+                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=1">디지털 / 가전</a></li>
                      <li><a class="py-2 px-3"
-                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=2">게시판2</a></li>
+                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=2">캠핑 용품</a></li>
                      <li><a class="py-2 px-3"
-                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=3">게시판3</a></li>
+                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=3">미용 용품</a></li>
                      <li><a class="py-2 px-3"
-                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=4">게시판4</a></li>
+                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=4">가구 / 인테리어</a></li>
                      <li><a class="py-2 px-3"
-                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=5">게시판5</a></li>
+                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=5">스포츠 레저</a></li>
                      <li><a class="py-2 px-3"
-                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=6">게시판6</a></li>
+                        href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=6">게임 용품</a></li>
 
                   </ul>
                </div>

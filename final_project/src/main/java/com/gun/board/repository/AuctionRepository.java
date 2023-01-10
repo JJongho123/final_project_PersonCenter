@@ -47,7 +47,7 @@ public class AuctionRepository {
 		return result;
 	}
 
-	// �ŷ��Խ��� (�߰�)
+
 	public ArrayList<Auction> getTransaction(int transaction_name) {
 		ArrayList<Auction> result = new ArrayList();
 		adao = sqlSession.getMapper(AuctionDAO.class);
@@ -64,7 +64,7 @@ public class AuctionRepository {
 		return result;
 	}
 
-	// �Խñ� ��ȸ(����)
+
 	public ArrayList<Auction> getBoards(String friend_id) {
 		ArrayList<Auction> result = new ArrayList();
 		adao = sqlSession.getMapper(AuctionDAO.class);
@@ -77,7 +77,7 @@ public class AuctionRepository {
 		return result;
 	}
 
-	// �Խñ� ��ȸ(Ȩ��)
+	
 	public ArrayList<Auction> getAuction_home() {
 		ArrayList<Auction> result = new ArrayList();
 		adao = sqlSession.getMapper(AuctionDAO.class);
@@ -103,7 +103,7 @@ public class AuctionRepository {
 	}
 
 	public void upHits(int board_num) {
-		// ��ȸ�� �ø���
+	
 		adao = sqlSession.getMapper(AuctionDAO.class);
 		try {
 			adao.upHits(board_num);

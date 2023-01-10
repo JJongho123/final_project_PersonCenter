@@ -65,7 +65,7 @@ public class DataController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getBoards(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "friend_id", defaultValue = "") String friend_id) {
-		logger.info("寃뚯떆�뙋 �솃");
+	
 		String cus_id = (String) session.getAttribute("loginid");
 		if (friend_id.equals("") || friend_id.equals(cus_id)) {
 			friend_id = cus_id;
@@ -84,8 +84,7 @@ public class DataController {
 		page = Paginationd.getCurrentPage(page, totalPages);
 		boards_data = Paginationd.totalPosts(boards_data, page);
 		int endPage = Paginationd.endPage(page, totalPages);
-		logger.info("珥� �럹�씠吏� : " + totalPages + ", �걹�럹�씠吏� :  " + endPage + "�쁽�옱 �럹�씠吏� :  " + page + "寃뚯떆臾� �닔 : "
-				+ boards_data.size() + " status: " + (String) session.getAttribute("status"));
+	
 		model.addAttribute("data", boards_data);
 		model.addAttribute("page", page);
 		model.addAttribute("endPage", endPage);
@@ -148,7 +147,7 @@ public class DataController {
 		model.addAttribute("friend_id", friend_id);
 		logger.info("date" + data);
 
-		// 由ы뵆�씪�씠 遺�遺�
+		
 		ArrayList<Reply_Data> reply = rRepository.getReplies(board_num);
 		model.addAttribute("reply", reply);
 		return "boards_data/get";
@@ -206,11 +205,11 @@ public class DataController {
 		Reply_Data reply = rRepository.getReply(reply_num);
 		int result = 0;
 		if (reply_num == -1) {
-			// �썝 �뙎湲��씤 寃쎌슦
+		
 			newReply.setReply_id(reply_Id);
 			newReply.setReply_nickname(reply_Nickname);
 		} else {
-			// ���뙎湲��씤 寃쎌슦
+			
 			newReply.setReply_id(reply.getReply_id());
 			newReply.setReply_nickname(reply.getReply_nickname());
 			newReply.setRreply_id(reply_Id);
@@ -218,24 +217,24 @@ public class DataController {
 			newReply.setRreply_num(reply_num);
 		}
 		result = rRepository.insertReply(newReply);
-		// �썝�뙎湲��씪 寃쎌슦 rreply num 異붽�濡� �꽔�뼱二쇨린
+		
 		if (reply_num == -1) {
 			reply_num = rRepository.recentlyAddedReplynum();
-			logger.info("理쒓렐�뿉 �벑濡앺븳 �뙎湲� 踰덊샇 : " + reply_num);
+		
 			rRepository.updateRReply_num(reply_num);
 		}
-		// 0 : �뙎湲�異붽�
+	
 		dRepository.changeReply_data(board_num, 0);
-		logger.info("�뙎湲� �옉�꽦 寃곌낵 : " + result);
+	
 		return board_num;
 	}
 
 	@RequestMapping(value = "/deleteReply", method = RequestMethod.POST)
 	public @ResponseBody int deleteReply(int reply_num, int board_num) {
 		int result = rRepository.deleteReply(reply_num);
-		// 1 : �뙎湲� �궘�젣
+	
 		dRepository.changeReply_data(board_num, 1);
-		logger.info("�뙎湲� �궘�젣 寃곌낵 : " + result);
+		
 		return board_num;
 	}
 
@@ -244,7 +243,7 @@ public class DataController {
 		Reply_Data reply = rRepository.getReply(reply_num);
 		reply.setReply_content(reply_content);
 		int result = rRepository.updateReply(reply);
-		logger.info("�뙎湲� �닔�젙");
+		
 		return board_num;
 	}
 
@@ -256,7 +255,7 @@ public class DataController {
 			fileDeleteResult = FileService.deleteFile(Configuration.PHOTOPATH + "/" + data.getBoard_uploadfileid());
 		}
 		int result = dRepository.deleteBoards_data(board_num);
-		logger.info("湲� �궘�젣 : " + result + " , " + fileDeleteResult);
+		
 		return result;
 	}
 
@@ -270,7 +269,7 @@ public class DataController {
 		model.addAttribute("page", page);
 		model.addAttribute("friend_id", friend_id);
 		if (data.getBoard_id().equals(loginid)) {
-			// 湲��벖�궗�엺�씠�옉 濡쒓렇�씤�븳 �궗�엺�씠 媛숈쓣 �븣留� �뾽�럠�씠 媛��뒫�븯寃�
+		
 			model.addAttribute("data", data);
 			return "boards_data/update";
 		}
@@ -299,7 +298,7 @@ public class DataController {
 			data.setBoard_uploadfileid(board_uploadfileid);
 		}
 		int result = dRepository.updateBoards_data(data);
-		logger.info("湲� �닔�젙 寃곌낵: " + data.toString());
+		
 		ArrayList<Data> boards_data = dRepository.getData(friend_id);
 		int totalPages = Paginationd.totalPages(boards_data);
 		page = Paginationd.getCurrentPage(page, totalPages);
@@ -315,7 +314,7 @@ public class DataController {
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String gethome(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "friend_id", defaultValue = "") String friend_id) {
-		logger.info("寃뚯떆�뙋 �솃");
+	
 		String cus_id = (String) session.getAttribute("loginid");
 		if (friend_id.equals("") || friend_id.equals(cus_id)) {
 			friend_id = cus_id;
@@ -334,8 +333,7 @@ public class DataController {
 		page = Paginationd.getCurrentPage(page, totalPages);
 		data = Paginationd.totalPosts(data, page);
 		int endPage = Paginationd.endPage(page, totalPages);
-		logger.info("珥� �럹�씠吏�: " + totalPages + ", �걹�럹�씠吏� :  " + endPage + " �쁽�옱�럹�씠吏� :  " + page + " 寃뚯떆臾� �닔 : "
-				+ data.size() + " status: " + (String) session.getAttribute("status"));
+	
 		model.addAttribute("boards", data);
 		model.addAttribute("page", page);
 		model.addAttribute("endPage", endPage);
@@ -370,11 +368,11 @@ public class DataController {
 		return "boards_data/data";
 	}
 
-	// �젙蹂닿쾶�떆�뙋 �젙�젹
+
 	@RequestMapping(value = "/SortData", method = RequestMethod.GET)
 	public String SortData(String sortValue, Model model) {
 
-		System.out.println("�젙蹂닿쾶�떆�뙋 �젙�젹 �릱�굹~?~!? @@ sortValue : " + sortValue);
+	
 		ArrayList<Data> data = dRepository.getSort(sortValue);
 
 		int page = 1;

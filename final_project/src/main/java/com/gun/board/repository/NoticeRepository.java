@@ -102,7 +102,7 @@ public class NoticeRepository {
       
       search.put("searchType", searchType);
       search.put("searchContent", searchContent);
-      System.out.println("searchType @@@ :  " + searchType);
+ 
       ArrayList<Notice> result = new ArrayList();
       bdao = sqlSession.getMapper(NoticeDAO.class);
       try {

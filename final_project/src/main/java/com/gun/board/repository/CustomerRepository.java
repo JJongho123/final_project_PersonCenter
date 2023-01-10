@@ -72,7 +72,7 @@ public class CustomerRepository {
 		return result;
 	}
 
-	// ���� ����
+
 	public void insertPhoto(Customer customer) {
 		cdao = sqlSession.getMapper(CustomerDAO.class);
 		try {
@@ -84,7 +84,7 @@ public class CustomerRepository {
 
 	}
 
-	// ���� ��������
+
 	public Customer getPhoto(String cus_id) {
 		Customer result = new Customer();
 		cdao = sqlSession.getMapper(CustomerDAO.class);
@@ -148,7 +148,7 @@ public class CustomerRepository {
 		}
 	}
 
-	// ȸ�� ���� ã��
+	
 	public ArrayList<Customer> selectAllCustomer() {
 		ArrayList<Customer> result = new ArrayList();
 		cdao = sqlSession.getMapper(CustomerDAO.class);

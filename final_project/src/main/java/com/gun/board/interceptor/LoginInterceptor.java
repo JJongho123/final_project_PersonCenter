@@ -13,7 +13,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		// ·Î±×ÀÎ ÀÎÅÍ¼ÁÅÍ ·Î±×ÀÎ¼¼¼Ç °¡Á®¿À±â
+	
 		
 		HttpSession session = request.getSession();
 		String loginid = (String) session.getAttribute("loginid");
@@ -21,10 +21,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (loginid == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			str += "<script> alert('·Î±×ÀÎ ÇÏ¼¼¿ä');";
+			str += "<script> alert('ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.  ');";
 			str += "location.href='" + request.getContextPath() + "/'; </script>";
-			// System.out.println("LoginInterceptor is working..");
-			// response.sendRedirect(request.getContextPath() + "/customer/login");
+	
 			out.println(str);
 			out.flush();
 			return false;

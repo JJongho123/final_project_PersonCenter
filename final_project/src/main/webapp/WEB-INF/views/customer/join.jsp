@@ -114,7 +114,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	$(function() {
 
 		$('#emailCheck_num')
-				.keyup(
+				.blur(
 						function() {
 							let emailCheck_num = $('#emailCheck_num').val();
 
@@ -129,11 +129,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 										success : function(result) {
 											if (result == 1) {
+												$('#emailCheck_num').val('');
+												
 												$("#emailnum_check").html(
 														'인증번호를 확인해주세요.');
 												$("#emailnum_check").attr('color',
 														'#dc3545');
 											} else {
+												
 												$("#emailnum_check").html(
 														'인증번호가 맞습니다.');
 												$("#emailnum_check").attr('color',

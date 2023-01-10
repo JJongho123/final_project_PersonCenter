@@ -51,7 +51,7 @@ import com.gun.board.vo.Data;
 import com.gun.board.vo.Free;
 import com.gun.board.vo.MailHandler;
 import com.gun.board.vo.Notice;
-import com.gun.board.vo.TempKey;
+
 import com.gun.board.vo.Union;
 
 @RequestMapping(value = "/customer")

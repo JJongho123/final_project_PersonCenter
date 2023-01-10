@@ -1,25 +1,23 @@
 package com.gun.board.vo;
 
 public class Reply {
-	// 댓글
 
-	// 댓글이 속한 게시글 번호
 	private int board_num;
-	// 댓글의 고유 번호
+	
 	private int reply_num;
-	// 댓글 작성자 아이디
+	
 	private String reply_id;
-	// 댓글 내용
+
 	private String reply_content;
-	// 댓글 작성 시간
+
 	private String reply_date;
-	// 댓글 작성자 닉네임
+	
 	private String reply_nickname;
-	// 대댓글 작성자 아이디
+	
 	private String rreply_id;
-	// 대댓글 작성자 닉네임
+
 	private String rreply_nickname;
-	// 대댓글이 속한 댓글 번호
+	
 	private int rreply_num;
 
 	public int getRreply_num() {

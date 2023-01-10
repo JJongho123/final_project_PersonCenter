@@ -3,27 +3,27 @@ package com.gun.board.vo;
 import java.util.Date;
 
 public class Board {
-	// �Խñ� ���� ��ȣ
+	
 	private int board_num;
-	// �Խñ� ����
+	
 	private String board_title;
-	// �Խñ� ����
+
 	private String board_content;
-	// �ۼ� ��¥
+
 	private Date board_date;
-	// �ۼ��� ���̵�
+
 	private String board_id;
-	// ��ȸ��
+
 	private int board_hits;
-	// �г���
+
 	private String board_nickname;
-	// ��� ��
+	
 	private int board_replies;
-	// ��������
+	
 	private String board_see;
-	// ���� ���� �̸�
+	
 	private String board_fileid;
-	// ����Ǵ� ���� �̸�
+	
 	private String board_uploadfileid;
 	
 	public String getBoard_cost() {
@@ -43,9 +43,9 @@ public class Board {
 	}
 
 
-	// �ǸŰ���
+
 	private String board_cost;
-	//�Խ��� ī�װ�
+
 	private String board_category;
 	
 	

@@ -151,7 +151,7 @@ public class FriendRepository {
 	}
 	
 	
-	// (     Ѻκ )      ϱ         friend     ٲٰ  board_num     ֱ  
+
 		public int accept_2(String cus_id, String friend_id, int board_num) {
 			fdao = sqlSession.getMapper(FriendDAO.class);
 			int result = 0;
@@ -170,7 +170,7 @@ public class FriendRepository {
 			return result;
 		}
 
-		// (     Ѻκ )  Ǹ   ,       ,  Խñ    ȣ             
+	         
 		public String getStatus_2(String cus_id, String friend_id, int board_num) {
 			fdao = sqlSession.getMapper(FriendDAO.class);
 			String result = "";

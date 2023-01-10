@@ -90,12 +90,7 @@ public class N_BoardController {
    
       model.addAttribute("page", page);
       model.addAttribute("endPage", endPage);
-      
-      /*
-      model.addAttribute("friend_id", friend_id);
-      System.out.println("friend_id =" + friend_id);
-      */
-      
+   
       logger.info("boards :  " , boards);
       System.out.println("boards :  " + boards);
       model.addAttribute("boards", boards);

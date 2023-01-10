@@ -7,7 +7,7 @@ import com.gun.board.vo.Board;
 
 public interface BoardDAO {
 
-	// 거래게시판으로 추가
+	
 	public ArrayList<Board> getTransaction_0(int transaction_name) throws Exception;
 
 	public ArrayList<Board> getTransaction(int transaction_name) throws Exception;
