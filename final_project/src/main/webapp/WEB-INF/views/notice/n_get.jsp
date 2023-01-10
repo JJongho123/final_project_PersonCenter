@@ -100,7 +100,7 @@ function updateBoard(board_num){
 										${board.board_no_nickname }</button>
 									<!---->
 								</div>
-								<em class="nick_level"> 관리자 <i data-v-d34938e2=""
+								<em class="nick_level">  <i data-v-d34938e2=""
 									class="LevelIcon icon_level"
 									style="background-image: url(&quot;https://ca-fe.pstatic.net/web-pc/static/img/sprite_levelicon_9dbde2.svg#1_1-usage&quot;);"></i></em>
 							</div>
@@ -117,7 +117,7 @@ function updateBoard(board_num){
 						<a href="#" role="button" class="button_comment"><svg
 								class="svg-icon ico-post-comment-323232">
 								</svg></a><a href="#" role="button"
-							class="button_url">URL 복사</a>
+							class="button_url"></a>
 						<div class="toast_url_copy_successful" style="display: none;">
 							URL이 복사되었습니다. 원하는 곳에 붙여 넣으세요.</div>
 						<div class="more_area">

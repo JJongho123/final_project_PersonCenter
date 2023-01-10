@@ -154,12 +154,12 @@
 
 								</button>
 
-								<c:if test="${status=='myself'}">
+								
 									<a href="${pageContext.request.contextPath}/boards/insert"
 										class="btn btn-primary nofocus py-1 ml-2" role="button"> <i
 										class="fa fa-pencil" aria-hidden="true"></i>쓰기
 									</a>
-								</c:if>
+								
 							</div>
 						</div>
 					</div>

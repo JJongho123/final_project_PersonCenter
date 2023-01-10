@@ -16,10 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	SELECT board_num,board_no_date,board_no_title,board_check FROM board_notice 
    		   UNION ALL
    		SELECT board_num,board_date,board_title,board_check FROM board_data 
+   			UNION ALL
+   		SELECT board_num,board_date,board_title,board_check FROM board_free 
+   		
+   		
 	)
 		ORDER BY board_date DESC
 	)
-      <![CDATA[where rownum <= 5]]>
+      <![CDATA[where rownum <= 7]]>
       
    </select>
 	

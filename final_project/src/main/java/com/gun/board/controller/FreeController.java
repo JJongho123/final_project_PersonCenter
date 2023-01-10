@@ -106,6 +106,33 @@ public class FreeController {
       free.setBoard_id(board_id);
       free.setBoard_nickname(board_nickname);
       frRepository.insertBoards_free(free);
+      
+   // 회원등급제를 위한 메서드 추가
+		
+   		cRepository.countUp(board_id);
+   		
+   		int countCheck = cRepository.checkCount(board_id);
+   		
+   		if(countCheck > 0 && countCheck <= 2) {
+   			int cus_count = 1;
+   			cRepository.GradeUpdate(board_id,cus_count);
+   		}
+   		else if(countCheck > 2 && countCheck <= 4) {
+   			int cus_count = 2;
+   			cRepository.GradeUpdate(board_id,cus_count);
+   		}
+   		else if(countCheck > 4 && countCheck <= 6) {
+   			int cus_count = 3;
+   			cRepository.GradeUpdate(board_id,cus_count);
+   		}
+   		else {
+   			int cus_count = 4;
+   			cRepository.GradeUpdate(board_id,cus_count);
+   		}
+   		
+   		// 회원등급제를 위한 메서드 추가 끝
+   		
+   		
       if (!upload.isEmpty()) {
          System.out.println("upload file's name @@@: " + upload.getOriginalFilename());
          String board_uploadfileid = FileService.saveFile(upload, Configuration.PHOTOPATH);

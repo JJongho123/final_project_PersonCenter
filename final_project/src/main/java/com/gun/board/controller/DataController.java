@@ -95,7 +95,7 @@ public class DataController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insertBoards_data() {
-		logger.info("湲� �옉�꽦 �솕硫댁쑝濡� �씠�룞");
+		
 		return "boards_data/insert";
 	}
 
@@ -201,7 +201,7 @@ public class DataController {
 		Reply_Data newReply = new Reply_Data();
 		newReply.setBoard_num(board_num);
 		newReply.setReply_content(reply_content);
-		System.out.println("蹂대뱶�꽆 �솕�땲?" + board_num);
+		
 		Reply_Data reply = rRepository.getReply(reply_num);
 		int result = 0;
 		if (reply_num == -1) {

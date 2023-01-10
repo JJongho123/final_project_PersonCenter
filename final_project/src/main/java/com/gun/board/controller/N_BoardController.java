@@ -114,6 +114,31 @@ public class N_BoardController {
       board.setBoard_no_nickname(board_no_nickname);
       nRepository.insertBoard(board);
       
+   // 회원등급제를 위한 메서드 추가
+		
+   		cRepository.countUp(board_no_id);
+   		
+   		int countCheck = cRepository.checkCount(board_no_id);
+   		
+   		if(countCheck > 0 && countCheck <= 2) {
+   			int cus_count = 1;
+   			cRepository.GradeUpdate(board_no_id,cus_count);
+   		}
+   		else if(countCheck > 2 && countCheck <= 4) {
+   			int cus_count = 2;
+   			cRepository.GradeUpdate(board_no_id,cus_count);
+   		}
+   		else if(countCheck > 4 && countCheck <= 6) {
+   			int cus_count = 3;
+   			cRepository.GradeUpdate(board_no_id,cus_count);
+   		}
+   		else {
+   			int cus_count = 4;
+   			cRepository.GradeUpdate(board_no_id,cus_count);
+   		}
+   		
+   		// 회원등급제를 위한 메서드 추가 끝
+      
       ArrayList<Notice> boards = nRepository.getBoards(board_no_id);
       
      

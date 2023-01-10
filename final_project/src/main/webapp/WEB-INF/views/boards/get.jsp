@@ -125,13 +125,14 @@ function insertR_reply(reply_num){
 
 					<!-- 작성자 본인이라면 수정, 삭제  -->
 					<c:if test="${loginid==board.board_id }">
+					<a> </a>
 						<a href="#" role="button"
 							class="BaseButton BaseButton--skinGray size_default"> <input
 							type="button" value="수정" id="update" name="update"
 							onclick="updateBoard('${board.board_num}')"
 							class="btn btn-default">
 						</a>
-
+						
 						<a href="#" role="button"
 							class="BaseButton BaseButton--skinGray size_default"> <input
 							type="button" value="삭제" id="delete" name="delete"
@@ -164,7 +165,7 @@ function insertR_reply(reply_num){
 					<div class="WriterInfo">
 						<a href="/ca-fe/cafes/10050146/members/prkQguvG11zjC0KAkeAh_A"
 							class="thumb"><img
-							src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
+							src="${pageContext.request.contextPath}/boards/downloadBoardIMG?cus_id=${board.board_id}"
 							alt="프로필 사진" width="36" height="36"></a>
 						<div class="profile_area">
 							<div class="profile_info">
@@ -196,10 +197,8 @@ function insertR_reply(reply_num){
 						<a href="#" role="button" class="button_comment"><svg
 								class="svg-icon ico-post-comment-323232">
 								<use xlink:href="#ico-post-comment-323232" aria-hidden="true"></use></svg>댓글
-							<strong class="num">${board.board_replies }</strong></a><a href="#"
-							role="button" class="button_url">URL 복사</a>
-						<div class="toast_url_copy_successful" style="display: none;">
-							URL이 복사되었습니다. 원하는 곳에 붙여 넣으세요.</div>
+							<strong class="num">${board.board_replies }</strong></a>
+						
 						<div class="more_area">
 							<a id="articleTool" href="#" role="button" title="더보기"
 								class="button_more"><svg aria-label="더보기"
@@ -366,15 +365,7 @@ function insertR_reply(reply_num){
 													</c:if>
 
 													<!-- 내가 쓴 글 보기  -->
-													<!-- 만약 friend가 아니라면 -->
-													<c:if test="${agree2 =='failed'}">
-														<!-- 본인이 쓴 게시물이라면 -->
-														<c:if test="${loginid eq board.board_id }">
-
-
-														</c:if>
-													</c:if>
-
+								
 													<!-- 만약 판매자와 구매자가 상태가 친구라면 성공으로 표시하고 주소정보 불러오기 -->
 													<c:if
 														test="${agree2=='successed' && loginid eq board.board_id}">
@@ -411,19 +402,7 @@ function insertR_reply(reply_num){
 				<!--글 내용-->
 				${board.board_content }
 				<!---->
-				<div class="article_writer">
-					<div class="ArticleWriterProfile">
-						<a href="/ca-fe/cafes/10050146/members/prkQguvG11zjC0KAkeAh_A"
-							class="more_area"><span class="thumb"><img
-								src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
-								alt="프로필 사진" width="36" height="36"
-								onerror="this.onerror='';this.src='https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png';"></span><span
-							class="box"><strong class="user">${board.board_nickname }</strong>님의
-								게시글 더보기 <svg class="svg-icon ico-post-arrow-323232">
-										<use xlink:href="#ico-post-arrow-323232" aria-hidden="true"></use></svg></span></a>
-					</div>
-					<!---->
-				</div>
+			
 				<div class="ReplyBox">
 					<div class="box_left">
 						<div class="like_article">
@@ -437,23 +416,14 @@ function insertR_reply(reply_num){
 					<div class="comment_option">
 						<h3 class="comment_title">댓글</h3>
 						<div class="comment_tab">
-							<ul class="comment_tab_list">
-								<li class="comment_tab_item"><a href="#" role="button"
-									aria-selected="true" class="comment_tab_button"> 등록순 </a></li>
-								<li class="comment_tab_item"><a href="#" role="button"
-									aria-selected="false" class="comment_tab_button"> 최신순 </a></li>
-							</ul>
+						
 							<button type="button" class="comment_refresh_button">
 								<span class="blind">새로고침</span>
 							</button>
 						</div>
 						<div class="comment_alarm">
 							<div class="SubscribeButton">
-								<a href="#" class="button_report">신고</a>
-								<div class="ToggleSwitch ToggleSwitch--skinGray">
-									<input id="2" type="checkbox" class="switch_input blind"><label
-										for="2" class="switch_slider"><span class="blind">등록</span></label>
-								</div>
+							
 							</div>
 						</div>
 					</div>
@@ -462,10 +432,7 @@ function insertR_reply(reply_num){
 						<ul class="comment_list">
 
 							<li class="CommentItem"><div class="comment_area">
-									<a href="/ca-fe/cafes/10050146/members/prkQguvG11zjC0KAkeAh_A"
-										class="comment_thumb"><img
-										src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
-										alt="프로필 사진" width="36" height="36"></a>
+								
 									<div class="comment_box">
 										<div data-v-cb8347f8="" class="comment_nick_box">
 											<div class="comment_nick_info">

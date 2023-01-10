@@ -45,9 +45,9 @@
 								<div class="carousel-item active">
 									<div class="img-wrap">
 										<div class="img-item">
-											<a href="https://youtu.be/bDZtSJSU_nU" target="_blank"> <img
-												src="https://img.youtube.com/vi/bDZtSJSU_nU/maxresdefault.jpg"
-												alt="일본 K-소주에 취하다">
+											<a href="https://www.youtube.com/D3lok0jrBPA" target="_blank"> <img
+												src="https://img.youtube.com/vi/D3lok0jrBPA/maxresdefault.jpg"
+												alt="">
 											</a>
 										</div>
 									</div>
@@ -55,9 +55,9 @@
 								<div class="carousel-item">
 									<div class="img-wrap">
 										<div class="img-item">
-											<a href="https://youtu.be/EepDPC5f1Yk" target="_blank"> <img
-												src="https://img.youtube.com/vi/EepDPC5f1Yk/maxresdefault.jpg"
-												alt="현대 아이오닉6에 대한 해외반응">
+											<a href="https://www.youtube.com/h4IhV6xOgNc" target="_blank"> <img
+												src="https://img.youtube.com/vi/h4IhV6xOgNc/maxresdefault.jpg"
+												alt="">
 											</a>
 										</div>
 									</div>
@@ -65,9 +65,9 @@
 								<div class="carousel-item">
 									<div class="img-wrap">
 										<div class="img-item">
-											<a href="https://youtu.be/-yjfbeQzIbA" target="_blank"> <img
-												src="https://img.youtube.com/vi/-yjfbeQzIbA/maxresdefault.jpg"
-												alt="김하성의 허슬플레이">
+											<a href="https://www.youtube.com/zmv2iqStBlI" target="_blank"> <img
+												src="https://img.youtube.com/vi/zmv2iqStBlI/maxresdefault.jpg"
+												alt="">
 											</a>
 										</div>
 									</div>
@@ -75,9 +75,9 @@
 								<div class="carousel-item">
 									<div class="img-wrap">
 										<div class="img-item">
-											<a href="https://youtu.be/W6z1L1RmPK0" target="_blank"> <img
-												src="https://img.youtube.com/vi/W6z1L1RmPK0/maxresdefault.jpg"
-												alt="미국 시골에서 백종원의 홍콩반점을 차리면 생기는일">
+											<a href="https://www.youtube.com/8LephYvKQXU" target="_blank"> <img
+												src="https://img.youtube.com/vi/8LephYvKQXU/maxresdefault.jpg"
+												alt="">
 											</a>
 										</div>
 									</div>
@@ -85,9 +85,9 @@
 								<div class="carousel-item">
 									<div class="img-wrap">
 										<div class="img-item">
-											<a href="https://youtu.be/FzOhSEuSpow" target="_blank"> <img
-												src="https://img.youtube.com/vi/FzOhSEuSpow/maxresdefault.jpg"
-												alt="현대 N 비전 74에 해외 반응">
+											<a href="https://www.youtube.com/pKXloGOM1p4" target="_blank"> <img
+												src="https://img.youtube.com/vi/pKXloGOM1p4/maxresdefault.jpg"
+												alt="">
 											</a>
 										</div>
 									</div>
@@ -245,50 +245,50 @@
 							<li class="item">
 								<div class="img-wrap" style="padding-bottom: 56.25%;">
 									<div class="img-item">
-										<a href="https://youtu.be/W6z1L1RmPK0" target="_blank"> <img
-											src="https://img.youtube.com/vi/W6z1L1RmPK0/maxresdefault.jpg"
-											alt="미국 시골에서 백종원의 홍콩반점을 차리면 생기는일" class="na-round">
-										</a>
+										<a href="https://www.youtube.com/D3lok0jrBPA" target="_blank"> <img
+												src="https://img.youtube.com/vi/D3lok0jrBPA/maxresdefault.jpg"
+												alt="">
+												</a>
 									</div>
 								</div>
 							</li>
 							<li class="item">
 								<div class="img-wrap" style="padding-bottom: 56.25%;">
 									<div class="img-item">
-										<a href="https://youtu.be/bDZtSJSU_nU" target="_blank"> <img
-											src="https://img.youtube.com/vi/bDZtSJSU_nU/maxresdefault.jpg"
-											alt="일본 K-소주에 취하다" class="na-round">
-										</a>
+										<a href="https://www.youtube.com/h4IhV6xOgNc" target="_blank"> <img
+												src="https://img.youtube.com/vi/h4IhV6xOgNc/maxresdefault.jpg"
+												alt="">
+											</a>
 									</div>
 								</div>
 							</li>
 							<li class="item">
 								<div class="img-wrap" style="padding-bottom: 56.25%;">
 									<div class="img-item">
-										<a href="https://youtu.be/-yjfbeQzIbA" target="_blank"> <img
-											src="https://img.youtube.com/vi/-yjfbeQzIbA/maxresdefault.jpg"
-											alt="김하성의 허슬플레이" class="na-round">
-										</a>
+										<a href="https://www.youtube.com/zmv2iqStBlI" target="_blank"> <img
+												src="https://img.youtube.com/vi/zmv2iqStBlI/maxresdefault.jpg"
+												alt="">
+											</a>
 									</div>
 								</div>
 							</li>
 							<li class="item">
 								<div class="img-wrap" style="padding-bottom: 56.25%;">
 									<div class="img-item">
-										<a href="https://youtu.be/EepDPC5f1Yk" target="_blank"> <img
-											src="https://img.youtube.com/vi/EepDPC5f1Yk/maxresdefault.jpg"
-											alt="현대 아이오닉6에 대한 해외반응" class="na-round">
-										</a>
+										<a href="https://www.youtube.com/8LephYvKQXU" target="_blank"> <img
+												src="https://img.youtube.com/vi/8LephYvKQXU/maxresdefault.jpg"
+												alt="">
+											</a>
 									</div>
 								</div>
 							</li>
 							<li class="item">
 								<div class="img-wrap" style="padding-bottom: 56.25%;">
 									<div class="img-item">
-										<a href="https://youtu.be/FzOhSEuSpow" target="_blank"> <img
-											src="https://img.youtube.com/vi/FzOhSEuSpow/maxresdefault.jpg"
-											alt="현대 N 비전 74에 해외 반응" class="na-round">
-										</a>
+									<a href="https://www.youtube.com/pKXloGOM1p4" target="_blank"> <img
+												src="https://img.youtube.com/vi/pKXloGOM1p4/maxresdefault.jpg"
+												alt="">
+											</a>
 									</div>
 								</div>
 							</li>
@@ -642,7 +642,7 @@
 					</c:if>
 					<!-- 위젯 시작 { -->
 					<h3 class="h3 f-lg en">
-						<a href="#"  style="color:red;"> <span class="float-right more-plus"></span> 공지사항
+						<a href="#"  style="color:red;"> <span class="float-right more-plus"></span>*공지사항
 						</a>
 					</h3>
 					<hr class="hr" />
@@ -682,7 +682,7 @@
 
 						<script>
 							$('#vid_rgucipokdlbsnehfmtqja').prettyEmbed({
-								videoID : '-yjfbeQzIbA',
+								videoID : 'Vx2QYQLgRq0',
 								previewSize : 'maxresdefault',
 								customPreviewImage : '',
 								showInfo : false,
@@ -728,6 +728,9 @@
 												 </c:if>
 												 <c:if test="${item.board_check eq 3}">
 													"${pageContext.request.contextPath}/notice/get?board_num=${item.board_num}&page=${page}"
+												 </c:if>
+												  <c:if test="${item.board_check eq 4}">
+													"${pageContext.request.contextPath}/boards_free/get?board_num=${item.board_num}&page=${page}"
 												 </c:if>
 												 
 												 

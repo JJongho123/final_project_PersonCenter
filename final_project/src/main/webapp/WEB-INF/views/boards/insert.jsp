@@ -56,12 +56,12 @@
 						<span class="note-current-fontname" style="font-family: sans-serif;"> <select
 							name="board_category" id="board_category" required class="form-control">
 								<option value="">게시판 선택</option>
-								<option value="1">게시판 1</option>
-								<option value="2">게시판 2</option>
-								<option value="3">게시판 3</option>
-								<option value="4">게시판 4</option>
-								<option value="5">게시판 5</option>
-								<option value="6">게시판 6</option>
+								<option value="1">디지털 / 가전</option>
+								<option value="2">캠핑 용품</option>
+								<option value="3">미용 용품</option>
+								<option value="4">가구 / 인테리어</option>
+								<option value="5">스포츠 레저</option>
+								<option value="6">게임 용품</option>
 						</select>
 						</span> <input type="text" class="form-control" id="board_title"
 							name="board_title" placeholder="제목" required class="form-control"

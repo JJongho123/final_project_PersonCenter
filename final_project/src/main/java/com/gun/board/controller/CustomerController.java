@@ -102,7 +102,7 @@ public class CustomerController {
 	HttpSession session;
 
 	private int authNumber;
-
+	
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String home(Model model) {
 		logger.info("회원가입");
@@ -579,14 +579,6 @@ public class CustomerController {
 			return result;
 		}
 
-	}
-
-	// 이메일인증
-	@RequestMapping(value = "/emailView", method = RequestMethod.GET)
-	public String email(Customer customer, Model model) {
-
-		logger.info("이메일 뷰 페이지 이동 컨트롤러  !!! ");
-		return "customer/email";
 	}
 
 	// 마지막 닫는괄호

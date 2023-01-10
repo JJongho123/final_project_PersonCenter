@@ -91,7 +91,7 @@ public class AuctionController {
 		return "boards_auction/a_home";
 	}
 
-	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	@RequestMapping(value = "/a_insert", method = RequestMethod.GET)
 	public String insertBoard() {
 		logger.info("글 작성 화면으로 이동");
 		return "boards_auction/a_insert";
