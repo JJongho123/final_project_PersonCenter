@@ -72,11 +72,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 									<div class="col-sm-4" style="margin-left: 50px;">
 										<label class="col-sm-2 col-form-label" for="input-file">
 											
-										</label><input type="file" name="upload" class="form-control required" 
-										style="width: 243; height:40;" >
+										</label><input type="file" name="upload" class="form-control" 
+										style="width: 243; height:40;">
 										
-										<!--   <input type="file" name="upload" id="input-file"class="form-control required"
-											style="display: none;"><small><b>사진수정</b></small>-->
 
 									</div>
 									<div class="col-sm-4"></div>
@@ -181,7 +179,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 									<label class="col-sm-2 col-form-label">계좌<strong
 										class="sr-only">필수</strong></label> &nbsp;&nbsp;&nbsp;<select
 										name="cus_bank" id="cus_bank">
-										<option value="">선택</option>
+										<option value="${customer.cus_bank}">${customer.cus_bank}</option>
 										<option value="농협">농협</option>
 										<option value="국민">국민</option>
 										<option value="기업">기업</option>
@@ -191,7 +189,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 									<div class="col-sm-4">
 										<input type="number" name="cus_account" id="cus_account"
-											required class="form-control nospace required"
+											required class="form-control nospace required" 
+											value="${customer.cus_account}"
 											style="width: 272; height: 40;" maxlength="20"
 											placeholder="- 빼고 숫자로만 작성해주세요.">
 									</div>
@@ -203,6 +202,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 									<div class="col-sm-2">
 										<input placeholder="우편번호" name="cus_zip_code"
 											id="cus_zip_code" class="form-control"
+											value="${customer.cus_zip_code}"
 											style="width: 150; height: 40;" readonly="readonly">
 									</div>
 									<div class="col-sm-2">
@@ -218,6 +218,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 									</label>
 									<div class="col-sm-4">
 										<input placeholder="주소" name="cus_addr" id="cus_addr"
+											value="${customer.cus_addr}"
 											class="form-control" style="width: 343; height: 40;"
 											readonly="readonly">
 									</div>
@@ -231,7 +232,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 									<div class="col-sm-4">
 										<input type="number" name="cus_tel" id="cus_tel" required
 											class="form-control nospace required" maxlength="11"
-											placeholder="- 빼고 숫자로만 작성해주세요.">
+											value="${customer.cus_tel}">
 									</div>
 								</div>
 							</li>
@@ -249,11 +250,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							</div>
 						</div>
 
-						<input type="hidden" name="cus_answer"
-							value="${customer.cus_answer}" id="cus_answer" required
-							class="form-control required"> <input type="hidden"
-							name="cus_question" value="${customer.cus_question}" id="cus_id"
-							required class="form-control required">
 
 
 					</form>

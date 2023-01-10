@@ -336,7 +336,7 @@
 							<h3 class="h3 f-lg en">
 								<a
 									href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=1">
-									<span class="float-right more-plus"></span>게시판 1
+									<span class="float-right more-plus"></span>디지털 / 가전
 								</a>
 							</h3>
 							<hr class="hr" />
@@ -370,7 +370,7 @@
 							<h3 class="h3 f-lg en">
 								<a
 									href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=2">
-									<span class="float-right more-plus"></span>게시판 2
+									<span class="float-right more-plus"></span>캠핑 용품
 								</a>
 							</h3>
 							<hr class="hr" />
@@ -404,7 +404,7 @@
 							<h3 class="h3 f-lg en">
 								<a
 									href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=3">
-									<span class="float-right more-plus"></span>게시판 3
+									<span class="float-right more-plus"></span>미용 용품
 								</a>
 							</h3>
 							<hr class="hr" />
@@ -441,7 +441,7 @@
 							<h3 class="h3 f-lg en">
 								<a
 									href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=4">
-									<span class="float-right more-plus"></span>게시판 4
+									<span class="float-right more-plus"></span>가구 / 인테리어
 								</a>
 							</h3>
 							<hr class="hr" />
@@ -475,7 +475,7 @@
 							<h3 class="h3 f-lg en">
 								<a
 									href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=5">
-									<span class="float-right more-plus"></span>게시판 5
+									<span class="float-right more-plus"></span>스포츠 레저
 								</a>
 							</h3>
 							<hr class="hr" />
@@ -509,7 +509,7 @@
 							<h3 class="h3 f-lg en">
 								<a
 									href="${pageContext.request.contextPath}/boards_transaction/transaction?board_category_name=6">
-									<span class="float-right more-plus"></span>게시판 6
+									<span class="float-right more-plus"></span>게임 용품
 								</a>
 							</h3>
 							<hr class="hr" />
@@ -609,11 +609,8 @@
 												<img
 													src="${pageContext.request.contextPath}/customer/download"
 													class="rounded-circle" style="width: 60px; height: 60px;">
-											</c:if> <c:if test="${empty customer}">
-												<img
-													src="${pageContext.request.contextPath}/img/post-sample-image"
-													class="rounded-circle" style="width: 60px; height: 60px;">
 											</c:if>
+											
 										</a>
 									</div>
 									<div class="flex-grow-1 pt-2">
@@ -627,12 +624,13 @@
 												</a>
 											</span></b>
 										</h5>
+										<b style="margin-left:15px;"> 
+										<small>등급 :&nbsp;${grade}</small>
+										</b>
 									</div>
 								</div>
 								<div class="btn-group w-100" role="group"
 									aria-label="Member Menu">
-									<a href="${pageContext.request.contextPath}/customer/emailView"
-										class="btn btn-primary text-white" role="button"> 이메일 </a>
 									<a href="${pageContext.request.contextPath}/customer/vertify"
 										class="btn btn-primary text-white" role="button"> 내정보 </a> <a
 										href="${pageContext.request.contextPath}/customer/logout"
@@ -644,7 +642,7 @@
 					</c:if>
 					<!-- 위젯 시작 { -->
 					<h3 class="h3 f-lg en">
-						<a href="#"  style="color:red;"> <span class="float-right more-plus"></span> 공지
+						<a href="#"  style="color:red;"> <span class="float-right more-plus"></span> 공지사항
 						</a>
 					</h3>
 					<hr class="hr" />

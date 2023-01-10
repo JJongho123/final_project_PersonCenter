@@ -220,12 +220,12 @@ public class CustomerRepository {
 	}
 
 	// 임시비밀번호로 업데이트
-	public void temporaryPassword(int authNumber, String cus_id) {
+	public void temporaryPassword(String encodeigpasswd, String cus_id) {
 	cdao = sqlSession.getMapper(CustomerDAO.class);
 		
-		Map<String, Object> temporary = new HashMap();
+		Map<String, String> temporary = new HashMap();
 		
-		temporary.put("cus_pw", authNumber);
+		temporary.put("cus_pw", encodeigpasswd);
 		temporary.put("cus_id", cus_id);
 		
 		try {

@@ -147,7 +147,7 @@ public class CustomerController {
 		System.out.println("customer.getEmail() : " + customer.getEmail());
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("인증메일입니다");
-		sendMail.setText("<h1>인증 번호는 [ " + authNumber + " ] 입니다.</h1>" + "<br><h3> 해당 인증번호를 인증번호 확인란에 기입하여 주세요.</h3>");
+		sendMail.setText("<h1>인증 번호는 [" + authNumber + "] 입니다.</h1>" + "<br><h3> 해당 인증번호를 인증번호 확인란에 기입하여 주세요.</h3>");
 		sendMail.setFrom("jjh33534@gmail.com", "관리자");
 		sendMail.setTo(customer.getEmail());
 		sendMail.send();
@@ -175,6 +175,7 @@ public class CustomerController {
 			customer.setBoard_uploadfileid(board_uploadfileid);
 			cRepository.insertPhoto(customer);
 		}
+	
 
 		// 거래글(6개)
 		int page = 1;
@@ -218,6 +219,8 @@ public class CustomerController {
 		Customer customer = cRepository.getPhoto(cus_id);
 
 		String originalfile = customer.getBoard_fileid();
+		
+		
 
 		try {
 			response.setHeader("Content-Disposition",
@@ -227,8 +230,10 @@ public class CustomerController {
 			e.printStackTrace();
 		}
 
-		String fullpath = Configuration.PHOTOPATH + "/" + customer.getBoard_uploadfileid();
 
+			String fullpath = Configuration.PHOTOPATH + "/" + customer.getBoard_uploadfileid();
+
+		
 		ServletOutputStream fileout = null;
 		FileInputStream filein = null;
 
@@ -281,6 +286,7 @@ public class CustomerController {
 			model.addAttribute("loginResult", "Login succeeded");
 			session.setAttribute("loginid", cusCompare.getCus_id());
 			session.setAttribute("loginNickname", cusCompare.getCus_nickname());
+			session.setAttribute("grade", cusCompare.getCus_grade());
 
 			// 아이디 닉네임 설정
 			int numofFriendRequest = fRepository.numofFriendRequest(customer.getCus_id());
@@ -381,29 +387,28 @@ public class CustomerController {
 		
 		String email = cRepository.findPassword(customer);
 		
-		//암호화
-//		String inputpasswd = Integer.toString(authNumber);
-//		String encodeigpasswd = pwdEncoder.encode(inputpasswd);
-		
-		
-		
+	
 		
 		if (email == null) {
 			return "false";
 		} else {
 			
 			makeRandomNumber();
+			
+			//암호화
+			String inputpasswd = Integer.toString(authNumber);
+			String encodeigpasswd = pwdEncoder.encode(inputpasswd);
 
 			System.out.println("customer.getEmail() : " + cusCompare.getEmail());
 			MailHandler sendMail = new MailHandler(mailSender);
-			sendMail.setSubject("인증메일입니다");
-			sendMail.setText("<h1>임시 비밀번호는 [ " + authNumber + " ] 입니다.</h1>" + "<br><h3> 임시 비밀번호로 로그인 해주세요.</h3>");
+			sendMail.setSubject("임시 비밀번호 메일입니다");
+			sendMail.setText("<h1>임시 비밀번호는 [" + authNumber + "] 입니다.</h1>" + "<br><h3> 임시 비밀번호로 로그인 해주세요.</h3>");
 			sendMail.setFrom("jjh33534@gmail.com", "관리자");
 			sendMail.setTo(cusCompare.getEmail());
 			sendMail.send();
 			
 			// 이메일로 보낸 임시 비밀번호 업데이트 메서드
-			cRepository.temporaryPassword(authNumber,customer.getCus_id());
+			cRepository.temporaryPassword(encodeigpasswd,customer.getCus_id());
 			
 			return email;
 		}
@@ -429,6 +434,8 @@ public class CustomerController {
 			model.addAttribute("loginResult", "Login succeeded");
 			session.setAttribute("loginid", cusCompare.getCus_id());
 			session.setAttribute("loginNickname", cusCompare.getCus_nickname());
+			session.setAttribute("grade", cusCompare.getCus_grade());
+			
 			// 아이디 닉네임 설정
 			int numofFriendRequest = fRepository.numofFriendRequest(customer.getCus_id());
 			session.setAttribute("numofFriendRequest", numofFriendRequest);
@@ -520,7 +527,7 @@ public class CustomerController {
 		}
 
 		ArrayList<Customer> customers = cRepository.updateCustomer(customer);
-
+		
 		return "home";
 	}
 

@@ -53,7 +53,7 @@ public interface CustomerDAO {
 	public String getcus_grade(String board_id)throws Exception;
 	
 	// 임시 비밀번호로 업데이트
-	public void temporaryPassword(Map<String, Object> temporary)throws Exception;
+	public void temporaryPassword(Map<String, String> temporary)throws Exception;
 	
 
 }
