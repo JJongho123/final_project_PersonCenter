@@ -249,8 +249,7 @@ function insertR_reply(reply_num){
 									<div class="product_area">
 										<div class="product_detail">
 											<div class="product_detail_box">
-												<div class="ProductCategory">카테고리 /
-													${board.board_category }</div>
+												
 												<p class="ProductName">
 													<em class="SaleLabel sold"> [판매] </em> ${board.board_title }
 												</p>
