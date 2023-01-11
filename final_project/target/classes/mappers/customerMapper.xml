@@ -96,7 +96,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cus_account = #{cus_account},
 		cus_zip_code = #{cus_zip_code},
 		cus_addr = #{cus_addr},
-		cus_tel = #{cus_tel}
+		cus_tel = #{cus_tel},
+		email = #{email}
 		where cus_id=#{cus_id}
 	</update>
 

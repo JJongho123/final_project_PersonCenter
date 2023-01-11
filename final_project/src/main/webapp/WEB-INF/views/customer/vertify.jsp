@@ -141,6 +141,18 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 									</div>
 
 								</div>
+								
+										<div class="form-group row">
+									<label class="col-sm-2 col-form-label" for="reg_mb_nick">이메일<strong
+										class="sr-only">필수</strong></label>
+									<div class="col-sm-4">
+										<input type="text" name="email"
+											value="${customer.email}" id="email" required
+											class="form-control nospace required" maxlength="20">
+									</div>
+								
+								</div>
+								
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">성별<strong
 										class="sr-only">필수</strong></label>

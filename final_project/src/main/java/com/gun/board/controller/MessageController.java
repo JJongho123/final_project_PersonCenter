@@ -83,7 +83,7 @@ public class MessageController {
 			mRepository.readMessage(message_num, num);
 			int numofReadMessage = mRepository.numofMessage(cus_id, category);
 			session.setAttribute("numofReadMessage", numofReadMessage);
-
+			
 		} else if (category.equals("sent") && !message.getCus_status().equals("read")) {
 			mRepository.readMessage(message_num, num);
 			int numofSentMessage = mRepository.numofMessage(cus_id, category);

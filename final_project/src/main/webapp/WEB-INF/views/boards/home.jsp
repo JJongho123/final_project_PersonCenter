@@ -197,15 +197,7 @@
 													<a
 														href="${pageContext.request.contextPath}/boards/get?board_num=${item.board_num}&page=${page}&friend_id=${friend_id}">${item.board_title }
 														(${item.board_replies }) </a>
-													<c:if test="${item.board_see=='all' }">
-														<span class="badge badge-info">All</span>
-													</c:if>
-													<c:if test="${item.board_see=='friend' }">
-														<span class="badge badge-light">Friend</span>
-													</c:if>
-													<c:if test="${item.board_see=='secret' }">
-														<span class="badge badge-dark">Secret</span>
-													</c:if>
+												
 													<span class="na-ticon na-file"></span>
 												</div>
 											</div>

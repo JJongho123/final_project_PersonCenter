@@ -369,6 +369,12 @@ public class CustomerController {
 		ArrayList<Auction> auction = aRepository.getAuction_home();
 		auction = Paginationa.totalPosts_home(auction, page);
 		model.addAttribute("auction", auction);
+		
+		// 최신글뽑기위한 전체게시판 통합
+		ArrayList<Union> union = uRepository.getUnion_home();
+		union = Pagination.totalPosts_uhome(union, page);
+		model.addAttribute("union", union);
+		
 
 		model.addAttribute("loginResult", "Logout succeeded");
 
@@ -431,7 +437,7 @@ public class CustomerController {
 			return null;
 		} else {
 			logger.info("로그인");
-			model.addAttribute("loginResult", "Login succeeded");
+			
 			session.setAttribute("loginid", cusCompare.getCus_id());
 			session.setAttribute("loginNickname", cusCompare.getCus_nickname());
 			session.setAttribute("grade", cusCompare.getCus_grade());
@@ -475,7 +481,13 @@ public class CustomerController {
 			auction = Paginationa.totalPosts_home(auction, page);
 			model.addAttribute("auction", auction);
 
+			// 최신글뽑기위한 전체게시판 통합
+			ArrayList<Union> union = uRepository.getUnion_home();
+			union = Pagination.totalPosts_uhome(union, page);
+			model.addAttribute("union", union);
+			
 			model.addAttribute("loginResult", "Logout succeeded");
+			
 
 			return "home";
 
@@ -527,6 +539,41 @@ public class CustomerController {
 		}
 
 		ArrayList<Customer> customers = cRepository.updateCustomer(customer);
+		
+		// 거래글(6개)
+				int page = 1;
+				for (int i = 1; i < 7; i++) {
+					ArrayList<Board> boards = bRepository.getBoards_home(i);
+					boards = Pagination.totalPosts_home(boards, page);
+					model.addAttribute("boards_home_" + i, boards);
+				}
+				model.addAttribute("page", page);
+
+				// 공지사항
+				ArrayList<Notice> Notice_boards = nRepository.getNotice_home();
+				model.addAttribute("Notice_boards", Notice_boards);
+
+				// 자유게시판
+				ArrayList<Free> free = frRepository.getFree_home();
+				free = Paginationf.totalPosts_home_free(free, page);
+				model.addAttribute("boards_free", free);
+
+				// 정보게시판
+				ArrayList<Data> data = dRepository.getData_home();
+				data = Paginationd.totalPosts_home_data(data, page);
+				model.addAttribute("boards_data", data);
+				
+				// 경매게시판
+				ArrayList<Auction> auction = aRepository.getAuction_home();
+				auction = Paginationa.totalPosts_home(auction, page);
+				model.addAttribute("auction", auction);
+				
+				
+				// 최신글뽑기위한 전체게시판 통합
+				ArrayList<Union> union = uRepository.getUnion_home();
+				union = Pagination.totalPosts_uhome(union, page);
+				model.addAttribute("union", union);
+				
 		
 		return "home";
 	}
