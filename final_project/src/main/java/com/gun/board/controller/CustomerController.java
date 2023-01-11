@@ -102,7 +102,7 @@ public class CustomerController {
 	HttpSession session;
 
 	private int authNumber;
-	
+
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String home(Model model) {
 		logger.info("회원가입");
@@ -122,7 +122,6 @@ public class CustomerController {
 	// 이메일 인증번호 체크
 	@RequestMapping(value = "/emailCheck_num", method = RequestMethod.POST)
 	public @ResponseBody int emailCheck_num(int emailCheck_num) {
-	
 
 		int result = 0;
 
@@ -135,13 +134,10 @@ public class CustomerController {
 		return result;
 	}
 
-
-
 	// 이메일보내기
 	@RequestMapping(value = "/emailSend", method = RequestMethod.POST)
 	public String join(Model model, Customer customer) throws Exception {
 
-	
 		makeRandomNumber();
 
 		System.out.println("customer.getEmail() : " + customer.getEmail());
@@ -151,7 +147,7 @@ public class CustomerController {
 		sendMail.setFrom("jjh33534@gmail.com", "관리자");
 		sendMail.setTo(customer.getEmail());
 		sendMail.send();
-		
+
 		return "customer/join";
 
 	}
@@ -175,7 +171,6 @@ public class CustomerController {
 			customer.setBoard_uploadfileid(board_uploadfileid);
 			cRepository.insertPhoto(customer);
 		}
-	
 
 		// 거래글(6개)
 		int page = 1;
@@ -205,6 +200,11 @@ public class CustomerController {
 		auction = Paginationa.totalPosts_home(auction, page);
 		model.addAttribute("auction", auction);
 
+		// 최신글뽑기위한 전체게시판 통합
+		ArrayList<Union> union = uRepository.getUnion_home();
+		union = Pagination.totalPosts_uhome(union, page);
+		model.addAttribute("union", union);
+
 		logger.info("회원정보: : " + customer);
 		return "home";
 
@@ -219,8 +219,6 @@ public class CustomerController {
 		Customer customer = cRepository.getPhoto(cus_id);
 
 		String originalfile = customer.getBoard_fileid();
-		
-		
 
 		try {
 			response.setHeader("Content-Disposition",
@@ -230,10 +228,8 @@ public class CustomerController {
 			e.printStackTrace();
 		}
 
+		String fullpath = Configuration.PHOTOPATH + "/" + customer.getBoard_uploadfileid();
 
-			String fullpath = Configuration.PHOTOPATH + "/" + customer.getBoard_uploadfileid();
-
-		
 		ServletOutputStream fileout = null;
 		FileInputStream filein = null;
 
@@ -369,12 +365,11 @@ public class CustomerController {
 		ArrayList<Auction> auction = aRepository.getAuction_home();
 		auction = Paginationa.totalPosts_home(auction, page);
 		model.addAttribute("auction", auction);
-		
+
 		// 최신글뽑기위한 전체게시판 통합
 		ArrayList<Union> union = uRepository.getUnion_home();
 		union = Pagination.totalPosts_uhome(union, page);
 		model.addAttribute("union", union);
-		
 
 		model.addAttribute("loginResult", "Logout succeeded");
 
@@ -388,20 +383,18 @@ public class CustomerController {
 
 	@RequestMapping(value = "/findPassword", method = RequestMethod.POST)
 	public @ResponseBody String findPassword(Customer customer) throws Exception {
-		
+
 		Customer cusCompare = cRepository.selectCustomer(customer.getCus_id());
-		
+
 		String email = cRepository.findPassword(customer);
-		
-	
-		
+
 		if (email == null) {
 			return "false";
 		} else {
-			
+
 			makeRandomNumber();
-			
-			//암호화
+
+			// 암호화
 			String inputpasswd = Integer.toString(authNumber);
 			String encodeigpasswd = pwdEncoder.encode(inputpasswd);
 
@@ -412,10 +405,10 @@ public class CustomerController {
 			sendMail.setFrom("jjh33534@gmail.com", "관리자");
 			sendMail.setTo(cusCompare.getEmail());
 			sendMail.send();
-			
+
 			// 이메일로 보낸 임시 비밀번호 업데이트 메서드
-			cRepository.temporaryPassword(encodeigpasswd,customer.getCus_id());
-			
+			cRepository.temporaryPassword(encodeigpasswd, customer.getCus_id());
+
 			return email;
 		}
 	}
@@ -437,11 +430,11 @@ public class CustomerController {
 			return null;
 		} else {
 			logger.info("로그인");
-			
+
 			session.setAttribute("loginid", cusCompare.getCus_id());
 			session.setAttribute("loginNickname", cusCompare.getCus_nickname());
 			session.setAttribute("grade", cusCompare.getCus_grade());
-			
+
 			// 아이디 닉네임 설정
 			int numofFriendRequest = fRepository.numofFriendRequest(customer.getCus_id());
 			session.setAttribute("numofFriendRequest", numofFriendRequest);
@@ -485,9 +478,8 @@ public class CustomerController {
 			ArrayList<Union> union = uRepository.getUnion_home();
 			union = Pagination.totalPosts_uhome(union, page);
 			model.addAttribute("union", union);
-			
+
 			model.addAttribute("loginResult", "Logout succeeded");
-			
 
 			return "home";
 
@@ -539,42 +531,40 @@ public class CustomerController {
 		}
 
 		ArrayList<Customer> customers = cRepository.updateCustomer(customer);
-		
+
 		// 거래글(6개)
-				int page = 1;
-				for (int i = 1; i < 7; i++) {
-					ArrayList<Board> boards = bRepository.getBoards_home(i);
-					boards = Pagination.totalPosts_home(boards, page);
-					model.addAttribute("boards_home_" + i, boards);
-				}
-				model.addAttribute("page", page);
+		int page = 1;
+		for (int i = 1; i < 7; i++) {
+			ArrayList<Board> boards = bRepository.getBoards_home(i);
+			boards = Pagination.totalPosts_home(boards, page);
+			model.addAttribute("boards_home_" + i, boards);
+		}
+		model.addAttribute("page", page);
 
-				// 공지사항
-				ArrayList<Notice> Notice_boards = nRepository.getNotice_home();
-				model.addAttribute("Notice_boards", Notice_boards);
+		// 공지사항
+		ArrayList<Notice> Notice_boards = nRepository.getNotice_home();
+		model.addAttribute("Notice_boards", Notice_boards);
 
-				// 자유게시판
-				ArrayList<Free> free = frRepository.getFree_home();
-				free = Paginationf.totalPosts_home_free(free, page);
-				model.addAttribute("boards_free", free);
+		// 자유게시판
+		ArrayList<Free> free = frRepository.getFree_home();
+		free = Paginationf.totalPosts_home_free(free, page);
+		model.addAttribute("boards_free", free);
 
-				// 정보게시판
-				ArrayList<Data> data = dRepository.getData_home();
-				data = Paginationd.totalPosts_home_data(data, page);
-				model.addAttribute("boards_data", data);
-				
-				// 경매게시판
-				ArrayList<Auction> auction = aRepository.getAuction_home();
-				auction = Paginationa.totalPosts_home(auction, page);
-				model.addAttribute("auction", auction);
-				
-				
-				// 최신글뽑기위한 전체게시판 통합
-				ArrayList<Union> union = uRepository.getUnion_home();
-				union = Pagination.totalPosts_uhome(union, page);
-				model.addAttribute("union", union);
-				
-		
+		// 정보게시판
+		ArrayList<Data> data = dRepository.getData_home();
+		data = Paginationd.totalPosts_home_data(data, page);
+		model.addAttribute("boards_data", data);
+
+		// 경매게시판
+		ArrayList<Auction> auction = aRepository.getAuction_home();
+		auction = Paginationa.totalPosts_home(auction, page);
+		model.addAttribute("auction", auction);
+
+		// 최신글뽑기위한 전체게시판 통합
+		ArrayList<Union> union = uRepository.getUnion_home();
+		union = Pagination.totalPosts_uhome(union, page);
+		model.addAttribute("union", union);
+
 		return "home";
 	}
 
@@ -605,7 +595,7 @@ public class CustomerController {
 		session.invalidate();
 
 		logger.info("회원 탈퇴 컨트롤러 !! @@ : ");
-		
+
 		return "home";
 	}
 
