@@ -36,7 +36,7 @@
 
 
 <h3>📙 Notion </h3>
-<img width="845" alt="화면 캡처 2023-01-12 144920" src="https://user-images.githubusercontent.com/112939338/211988329-9e8225d2-0b32-44c8-8461-b697de97199f.png">
+<img style="width: 100%;" alt="화면 캡처 2023-01-12 144920" src="https://user-images.githubusercontent.com/112939338/211988329-9e8225d2-0b32-44c8-8461-b697de97199f.png">
 
 <img style="width: 100%;" alt="화면 캡처 2023-01-12 143001" src="https://user-images.githubusercontent.com/112939338/211987368-d9f2b3a9-c248-4b90-883a-cb76ab03ff49.png">
 
