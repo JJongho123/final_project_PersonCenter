@@ -10,10 +10,6 @@
 <h3>📙 Site Map </h3>
 <img style="width: 100%;" alt="화면 캡처 2023-01-12 141247" src="https://user-images.githubusercontent.com/112939338/211984071-15b5a124-ab1d-430d-a79c-939c04a55904.png">
 
-<h3>📙 Notion </h3>
-<img width="845" alt="화면 캡처 2023-01-12 144920" src="https://user-images.githubusercontent.com/112939338/211988329-9e8225d2-0b32-44c8-8461-b697de97199f.png">
-
-<img style="width: 100%;" alt="화면 캡처 2023-01-12 143001" src="https://user-images.githubusercontent.com/112939338/211987368-d9f2b3a9-c248-4b90-883a-cb76ab03ff49.png">
 
 <h3>📙 사용 기술 </h3>
 <table style="width: 50%;">
@@ -37,6 +33,12 @@
 <td>Version Management System</td><td>Git (Github Desktop)</td>
 </tr>
 </table>
+
+
+<h3>📙 Notion </h3>
+<img width="845" alt="화면 캡처 2023-01-12 144920" src="https://user-images.githubusercontent.com/112939338/211988329-9e8225d2-0b32-44c8-8461-b697de97199f.png">
+
+<img style="width: 100%;" alt="화면 캡처 2023-01-12 143001" src="https://user-images.githubusercontent.com/112939338/211987368-d9f2b3a9-c248-4b90-883a-cb76ab03ff49.png">
 
 
 <h3>📙 프로젝트 화면 </h3>
