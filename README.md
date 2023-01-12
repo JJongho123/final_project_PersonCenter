@@ -43,7 +43,7 @@
 
 <h3>📙 프로젝트 화면 </h3>
 
-![image](https://user-images.githubusercontent.com/112939338/211989336-c97739f1-1478-44c5-bdb4-ebaee7958205.png)
+![image](https://user-images.githubusercontent.com/112939338/211991004-39f9631d-e930-44c7-be0e-630453bb9f3f.png)
 
 ![image](https://user-images.githubusercontent.com/112939338/211989112-8052ec47-117b-4806-874c-25255ca2b8a2.png)
 
