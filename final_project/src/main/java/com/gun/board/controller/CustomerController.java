@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.inject.Inject;
-import javax.mail.MessagingException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

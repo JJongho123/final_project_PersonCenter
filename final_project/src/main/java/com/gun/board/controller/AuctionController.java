@@ -33,7 +33,6 @@ import com.gun.board.util.FileService;
 import com.gun.board.util.Pagination_Auction;
 import com.gun.board.vo.Auction;
 import com.gun.board.vo.Customer;
-import com.gun.board.vo.Free;
 import com.gun.board.vo.Reply;
 
 @RequestMapping(value = "/boards_auction")
