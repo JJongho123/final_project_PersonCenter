@@ -37,22 +37,6 @@ public class FriendRepository {
 		return result;
 	}
 
-	public int friendRequest(String cus_id, String friend_id) {
-		Map<String, String> request = new HashMap();
-		request.put("cus_id", cus_id);
-		request.put("friend_id", friend_id);
-		fdao = sqlSession.getMapper(FriendDAO.class);
-		int result = 0;
-		try {
-			result = fdao.friendRequest(request);
-			fdao.friendRequestFriend(request);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
-	}
-
 	public String getStatus(String cus_id, String friend_id) {
 		fdao = sqlSession.getMapper(FriendDAO.class);
 		String result = "";
@@ -86,22 +70,6 @@ public class FriendRepository {
 		ArrayList<String> result = new ArrayList();
 		try {
 			result = fdao.getRequestList(cus_id, board_num);	
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	public int accept(String cus_id, String friend_id) {
-		fdao = sqlSession.getMapper(FriendDAO.class);
-		int result = 0;
-		Map<String, String> accept = new HashMap();
-		accept.put("cus_id", cus_id);
-		accept.put("friend_id", friend_id);
-		try {
-			result = fdao.accept(accept);
-			fdao.acceptFriend(accept);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -152,7 +120,7 @@ public class FriendRepository {
 	
 	
 
-		public int accept_2(String cus_id, String friend_id, int board_num) {
+		public int accept(String cus_id, String friend_id, int board_num) {
 			fdao = sqlSession.getMapper(FriendDAO.class);
 			int result = 0;
 			Map<String, Object> accept = new HashMap();
@@ -161,8 +129,8 @@ public class FriendRepository {
 			accept.put("board_num", board_num);
 
 			try {
-				result = fdao.accept_2(accept);
-				fdao.acceptFriend_2(accept);
+				result = fdao.accept(accept);
+				fdao.acceptFriend(accept);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -171,7 +139,7 @@ public class FriendRepository {
 		}
 
 	         
-		public String getStatus_2(String cus_id, String friend_id, int board_num) {
+		public String getTrader_Status(String cus_id, String friend_id, int board_num) {
 			fdao = sqlSession.getMapper(FriendDAO.class);
 			String result = "";
 			Map<String,  Object> search = new HashMap();
@@ -179,7 +147,7 @@ public class FriendRepository {
 			search.put("friend_id", friend_id);
 			search.put("board_num", board_num);
 			try {
-				result = fdao.getStatus_2(search);
+				result = fdao.getTrader_Status(search);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -187,7 +155,7 @@ public class FriendRepository {
 			return result;
 		}
 
-		public int friendRequest_2(String cus_id, String friend_id, int board_num) {
+		public int friendRequest(String cus_id, String friend_id, int board_num) {
 			Map<String, Object> request = new HashMap();
 			
 			request.put("cus_id", cus_id);
@@ -197,8 +165,8 @@ public class FriendRepository {
 			int result = 0;
 		
 			try {
-				result = fdao.friendRequest_2(request);
-				fdao.friendRequestFriend_2(request);
+				result = fdao.friendRequest(request);
+				fdao.friendRequestFriend(request);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -206,7 +174,7 @@ public class FriendRepository {
 			return result;
 		}
 
-		public String getfriend_2(String login_id, int board_num) {
+		public String getBuyer(String login_id, int board_num) {
 			Map<String, Object> request = new HashMap();
 			
 			request.put("cus_id", login_id);
@@ -214,7 +182,7 @@ public class FriendRepository {
 			fdao = sqlSession.getMapper(FriendDAO.class);
 			String result = "";
 			try {
-				result = fdao.getfriend_2(request);
+				result = fdao.getBuyer(request);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

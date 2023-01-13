@@ -269,21 +269,21 @@ public class N_BoardController {
          fileDeleteResult = FileService.deleteFile(Configuration.PHOTOPATH + "/" + board.getBoard_uploadfileid());
       }
       int result = nRepository.deleteBoard(board_num);
-      logger.info("        : " + result + " , " + fileDeleteResult);
+
       return result;
    }
 
    @RequestMapping(value = "/update", method = RequestMethod.GET)
-   public String updateBoard(int board_num, Model model, int page, String friend_id) {
+   public String updateBoard(int board_num, Model model, int page) {
       Notice board = nRepository.getBoard(board_num);
       String loginid = (String) session.getAttribute("loginid");
       if (board.getBoard_fileid() != null) {
          FileService.deleteFile(board.getBoard_uploadfileid());
       }
       model.addAttribute("page", page);
-      model.addAttribute("friend_id", friend_id);
+
       if (board.getBoard_no_id().equals(loginid)) {
-         //  ۾     ̶   α                                  ϰ 
+     
          model.addAttribute("board", board);
          return "notice/n_update";
       }
@@ -291,7 +291,7 @@ public class N_BoardController {
    }
 
    @RequestMapping(value = "/update", method = RequestMethod.POST)
-   public String updateBoard(int board_num, Notice board, int page, String friend_id, Model model) {
+   public String updateBoard(int board_num, Notice board, int page, Model model) {
  
       String loginid = (String) session.getAttribute("loginid");
 
@@ -305,7 +305,7 @@ public class N_BoardController {
       model.addAttribute("boards", boards);
       model.addAttribute("page", page);
       model.addAttribute("endPage", endPage);
-      model.addAttribute("friend_id", friend_id);
+
       return "notice/n_home";
    }
    

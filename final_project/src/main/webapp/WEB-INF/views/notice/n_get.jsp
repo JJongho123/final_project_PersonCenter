@@ -77,7 +77,7 @@ function updateBoard(board_num){
 				<div class="article_header">
 					<div class="ArticleTitle">
 						<a
-							href="https://cafe.naver.com/ArticleList.nhn?search.clubid=10050146&amp;search.menuid=396"
+							href="#"
 							class="link_board"> 공지사항 <svg
 								class="svg-icon ico-post-arrow-03-c-75-a">
 								<use xlink:href="#ico-post-arrow-03-c-75-a" aria-hidden="true"></use></svg></a>

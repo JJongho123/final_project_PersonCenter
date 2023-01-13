@@ -209,13 +209,13 @@
 		<div class="font-weight-normal px-3 px-sm-0">
 			<ul class="pagination justify-content-center en mb-0">
 				<li class="page-item"><a
-					href="${pageContext.request.contextPath}/notice?page=${page-1}&friend_id=${friend_id}">&laquo;</a></li>
+					href="${pageContext.request.contextPath}/notice?page=${page-1}">&laquo;</a></li>
 				<c:forEach var="page" begin="${page}" end="${endPage }">
 					<li><a
-						href="${pageContext.request.contextPath}/notice?page=${page}&friend_id=${friend_id}">${page}</a></li>
+						href="${pageContext.request.contextPath}/notice?page=${page}">${page}</a></li>
 				</c:forEach>
 				<li class="page-item"><a
-					href="${pageContext.request.contextPath}/notice?page=${page+1}&friend_id=${friend_id}">&raquo;</a></li>
+					href="${pageContext.request.contextPath}/notice?page=${page+1}">&raquo;</a></li>
 
 			</ul>
 		</div>

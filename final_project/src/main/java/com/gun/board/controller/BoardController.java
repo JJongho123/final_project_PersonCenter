@@ -59,24 +59,11 @@ public class BoardController {
 	Pagination Pagination = new Pagination();
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String getBoards(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "friend_id", defaultValue = "") String friend_id) {
+	public String getBoards(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 		logger.info("게시판 홈");
 		String cus_id = (String) session.getAttribute("loginid");
-		if (friend_id.equals("") || friend_id.equals(cus_id)) {
-			friend_id = cus_id;
-			session.setAttribute("status", "myself");
-		} else {
-			String status = fRepository.getStatus(cus_id, friend_id);
-			if (status == null || !status.equals("friend")) {
-				session.setAttribute("status", "notYet");
-			} else if (status.equals("friend")) {
-				session.setAttribute("status", "friend");
-			}
-		}
-		
 
-		ArrayList<Board> boards = bRepository.getBoards(friend_id);
+		ArrayList<Board> boards = bRepository.getBoards(cus_id);
 		int totalPages = Pagination.totalPages(boards);
 		page = Pagination.getCurrentPage(page, totalPages);
 		boards = Pagination.totalPosts(boards, page);
@@ -86,8 +73,8 @@ public class BoardController {
 		model.addAttribute("boards", boards);
 		model.addAttribute("page", page);
 		model.addAttribute("endPage", endPage);
-		model.addAttribute("friend_id", friend_id);
-		System.out.println("friend_id =" + friend_id);
+
+	
 		return "boards/home";
 	}
 
@@ -168,12 +155,12 @@ public class BoardController {
 		
 		// 판매자와 구매자 정보를 가져온다
 		String seller = board.getBoard_id();
-		String buyer = fRepository.getfriend_2(loginid, board_num);
+		String buyer = fRepository.getBuyer(loginid, board_num);
 
 		// 판매자와 구매자 거래가 성립되었는지 아닌지 상태를 저장해준다.
 		String board_status = fRepository.getStatus_board(seller, board_num); //게시글 번호별 상태조회
-		String status_seller = fRepository.getStatus_2(loginid, seller, board_num);
-		String status_buyer = fRepository.getStatus_2(loginid, buyer, board_num);
+		String status_seller = fRepository.getTrader_Status(loginid, seller, board_num);
+		String status_buyer = fRepository.getTrader_Status(loginid, buyer, board_num);
 		
 		// 판매자 및 구매자의 정보를 저장한다(계좌정보 등)
 		Customer seller_info = cRepository.selectCustomer(seller);
@@ -382,7 +369,7 @@ public class BoardController {
 		System.out.println("board_num : " + board_num);
 		
 		String cus_id = (String) session.getAttribute("loginid");
-		int result = fRepository.accept_2(cus_id, friend_id, board_num);
+		int result = fRepository.accept(cus_id, friend_id, board_num);
 		int numofFriendRequest = fRepository.numofFriendRequest(cus_id);
 		session.setAttribute("numofFriendRequest", numofFriendRequest);
 		logger.info("친구 수락 결과 : " + numofFriendRequest);
@@ -450,19 +437,19 @@ public class BoardController {
 			HttpServletRequest request) throws IOException {
 		
 		String cus_id = (String) session.getAttribute("loginid");
-		String checkRelationship = fRepository.getStatus_2(cus_id, friend_id, board_num);
+		String checkRelationship = fRepository.getTrader_Status(cus_id, friend_id, board_num);
 		
 		response.setContentType("text/html; charset=UTF-8"); 
 		PrintWriter out = response.getWriter(); 
 		 
 		if (checkRelationship == null) {
-			int result = fRepository.friendRequest_2(cus_id, friend_id,board_num);
+			int result = fRepository.friendRequest(cus_id, friend_id,board_num);
 			logger.info("친구 추가 : " + result);
 			out.println("<script>" + "alert('거래요청을 보냈습니다.');"+ "history.go(-1);"+ "</script>"); 
 			out.flush();
 			
 		} else if (checkRelationship.equals("request")) {
-			out.println("<script>" + "alert('님에게 이미 거래 요청을 전송하였습니다.');"+ "history.go(-1);"+ "</script>"); 
+			out.println("<script>" + "alert(' 이미 거래 요청을 전송하였습니다.');"+ "history.go(-1);"+ "</script>"); 
 			out.flush();
 			
 		} else if (checkRelationship.equals("friend")) {
@@ -482,36 +469,5 @@ public class BoardController {
 		return null;
 	}
 
-	@RequestMapping(value = "home", method = RequestMethod.GET)
-	public String gethome(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "friend_id", defaultValue = "") String friend_id) {
-		logger.info("게시판 홈");
-		String cus_id = (String) session.getAttribute("loginid");
-		if (friend_id.equals("") || friend_id.equals(cus_id)) {
-			friend_id = cus_id;
-			session.setAttribute("status", "myself");
-		} else {
-			String status = fRepository.getStatus(cus_id, friend_id);
-			if (status == null || !status.equals("friend")) {
-				session.setAttribute("status", "notYet");
-			} else if (status.equals("friend")) {
-				session.setAttribute("status", "friend");
-			}
-		}
-
-		ArrayList<Board> boards = bRepository.getBoards(friend_id);
-		int totalPages = Pagination.totalPages(boards);
-		page = Pagination.getCurrentPage(page, totalPages);
-		boards = Pagination.totalPosts(boards, page);
-		int endPage = Pagination.endPage(page, totalPages);
-		logger.info("총 페이지: " + totalPages + ", 끝페이지 :  " + endPage + " 현재페이지 :  " + page + " 게시물 수 : " + boards.size()
-				+ " status: " + (String) session.getAttribute("status"));
-		model.addAttribute("boards", boards);
-		model.addAttribute("page", page);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("friend_id", friend_id);
-		System.out.println("friend_id =" + friend_id);
-		return "boards/home";
-	}
 
 }

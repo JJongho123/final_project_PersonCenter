@@ -184,8 +184,7 @@
 
 						<ul class="na-table d-md-table w-100">
 							<c:forEach var="item" items="${boards }">
-								<c:if
-									test="${status=='myself'||item.board_see=='all'||item.board_see=='friend'&&status=='friend' }">
+								
 									<li
 										class="d-md-table-row px-3 py-2 p-md-0 text-md-center text-muted border-bottom">
 										<div
@@ -219,7 +218,7 @@
 												class="sr-only">조회</span>${item.board_hits}</div>
 										<div class="clearfix d-block d-md-none"></div>
 									</li>
-								</c:if>
+							
 							</c:forEach>
 						</ul>
 

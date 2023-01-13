@@ -620,7 +620,7 @@
 
 											<b style="letter-spacing: -1px;"> <span class="sv_wrap">
 
-													<a>${loginid} 님 <br>환영합니다
+													<a>${loginNickname} 님 <br>환영합니다
 												</a>
 											</span></b>
 										</h5>

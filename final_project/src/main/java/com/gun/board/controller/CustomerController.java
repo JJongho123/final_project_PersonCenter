@@ -96,7 +96,7 @@ public class CustomerController {
 	Pagination_Free Paginationf = new Pagination_Free();
 	Pagination_Data Paginationd = new Pagination_Data();
 	Pagination_Auction Paginationa = new Pagination_Auction();
-
+	
 	@Inject
 	HttpSession session;
 
@@ -160,7 +160,7 @@ public class CustomerController {
 		customer.setCus_pw(encodeigpasswd);
 		logger.info(customer.getCus_pw());
 		// 암호화 작업 끝
-
+		
 		cRepository.insertCustomer(customer);
 
 		if (!upload.isEmpty()) {
@@ -290,7 +290,7 @@ public class CustomerController {
 			session.setAttribute("numofReadMessage", numofReadMessage);
 			int numofSentMessage = mRepository.numofMessage(customer.getCus_id(), "sent");
 			session.setAttribute("numofSentMessage", numofSentMessage);
-
+			
 			// 이미지 파일 get
 			Customer customer2 = cRepository.getPhoto(customer.getCus_id());
 			session.setAttribute("customer", customer2.getBoard_fileid());

@@ -33,12 +33,11 @@
 						"board_num":${board_notice.board_num},
 						"board_no_title" :  $("#board_no_title").val(),
 						"board_no_content" : $("#board_no_content").val(),
-						"page":${page},
-						"friend_id":${friend_id}
+						"page":${page}
 					},
 					success : function(board_num) {
 							alert('공지 수정 완료');
-							location.href = "${pageContext.request.contextPath}/notice/get?board_num="+board_num+"&page=${page}&friend_id=${friend_id}";
+							location.href = "${pageContext.request.contextPath}/notice/get?board_num="+board_num+"&page=${page}";
 					}
 				});
 	}
