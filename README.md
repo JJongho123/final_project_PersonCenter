@@ -11,6 +11,10 @@
 <img style="width: 100%;" alt="화면 캡처 2023-01-12 141247" src="https://user-images.githubusercontent.com/112939338/211984071-15b5a124-ab1d-430d-a79c-939c04a55904.png">
 
 
+ <h3>📙 Youtube Url </h3>
+ https://youtu.be/jHM3JobiWpc
+
+
 <h3>📙 사용 기술 </h3>
 <table style="width: 50%;">
 
