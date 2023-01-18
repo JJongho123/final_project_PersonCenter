@@ -372,7 +372,7 @@ public class BoardController {
 		int result = fRepository.accept(cus_id, friend_id, board_num);
 		int numofFriendRequest = fRepository.numofFriendRequest(cus_id);
 		session.setAttribute("numofFriendRequest", numofFriendRequest);
-		logger.info("친구 수락 결과 : " + numofFriendRequest);
+		logger.info("거래 수락 결과 : " + numofFriendRequest);
 		return friend_id;
 	}
 

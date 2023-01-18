@@ -283,13 +283,13 @@ public class CustomerController {
 			session.setAttribute("loginNickname", cusCompare.getCus_nickname());
 			session.setAttribute("grade", cusCompare.getCus_grade());
 
-			// 아이디 닉네임 설정
-			int numofFriendRequest = fRepository.numofFriendRequest(customer.getCus_id());
-			session.setAttribute("numofFriendRequest", numofFriendRequest);
+			
+//			int numofFriendRequest = fRepository.numofFriendRequest(customer.getCus_id());
+//			session.setAttribute("numofFriendRequest", numofFriendRequest);
 			int numofReadMessage = mRepository.numofMessage(customer.getCus_id(), "read");
 			session.setAttribute("numofReadMessage", numofReadMessage);
-			int numofSentMessage = mRepository.numofMessage(customer.getCus_id(), "sent");
-			session.setAttribute("numofSentMessage", numofSentMessage);
+//			int numofSentMessage = mRepository.numofMessage(customer.getCus_id(), "sent");
+//			session.setAttribute("numofSentMessage", numofSentMessage);
 			
 			// 이미지 파일 get
 			Customer customer2 = cRepository.getPhoto(customer.getCus_id());
@@ -434,13 +434,16 @@ public class CustomerController {
 			session.setAttribute("loginNickname", cusCompare.getCus_nickname());
 			session.setAttribute("grade", cusCompare.getCus_grade());
 
-			// 아이디 닉네임 설정
-			int numofFriendRequest = fRepository.numofFriendRequest(customer.getCus_id());
-			session.setAttribute("numofFriendRequest", numofFriendRequest);
+			
+			
+			 
+//			int numofFriendRequest = fRepository.numofFriendRequest(customer.getCus_id());
+//			session.setAttribute("numofFriendRequest", numofFriendRequest);
 			int numofReadMessage = mRepository.numofMessage(customer.getCus_id(), "read");
 			session.setAttribute("numofReadMessage", numofReadMessage);
-			int numofSentMessage = mRepository.numofMessage(customer.getCus_id(), "sent");
-			session.setAttribute("numofSentMessage", numofSentMessage);
+//			int numofSentMessage = mRepository.numofMessage(customer.getCus_id(), "sent");
+//			session.setAttribute("numofSentMessage", numofSentMessage);
+			 
 
 			Customer customer2 = cRepository.getPhoto(customer.getCus_id());
 			session.setAttribute("customer", customer2.getBoard_fileid());
@@ -592,6 +595,41 @@ public class CustomerController {
 		String cus_id = (String) session.getAttribute("loginid");
 		cRepository.deleteCustomer(cus_id);
 		session.invalidate();
+		
+		int page = 1;
+		for (int i = 1; i < 7; i++) {
+			ArrayList<Board> boards = bRepository.getBoards_home(i);
+			boards = Pagination.totalPosts_home(boards, page);
+			model.addAttribute("boards_home_" + i, boards);
+		}
+		model.addAttribute("page", page);
+
+		// 공지사항
+		ArrayList<Notice> Notice_boards = nRepository.getNotice_home();
+		model.addAttribute("Notice_boards", Notice_boards);
+
+		// 자유게시판
+		ArrayList<Free> free = frRepository.getFree_home();
+		free = Paginationf.totalPosts_home_free(free, page);
+		model.addAttribute("boards_free", free);
+
+		// 정보게시판
+		ArrayList<Data> data = dRepository.getData_home();
+		data = Paginationd.totalPosts_home_data(data, page);
+		model.addAttribute("boards_data", data);
+		
+		// 경매게시판
+		ArrayList<Auction> auction = aRepository.getAuction_home();
+		auction = Paginationa.totalPosts_home(auction, page);
+		model.addAttribute("auction", auction);
+		
+		
+		// 최신글뽑기위한 전체게시판 통합
+		ArrayList<Union> union = uRepository.getUnion_home();
+		union = Pagination.totalPosts_uhome(union, page);
+		model.addAttribute("union", union);
+		
+		
 
 		logger.info("회원 탈퇴 컨트롤러 !! @@ : ");
 

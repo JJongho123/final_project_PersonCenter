@@ -27,8 +27,8 @@
 			url:"send",
 			method:"post",
 			data:{
-				"cus_id":${loginid},
-				"friend_id":${trader.friend_id},
+				"cus_id":"${loginid}",
+				"friend_id":"${trader.friend_id}",
 				"message_title":$("#message_title").val(),
 				"message":$("#message").val(),
 				"board_num":${trader.board_num}

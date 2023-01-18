@@ -21,7 +21,7 @@ $(function(){
 });
 
 function deleteBoard(){
-	if(confirm('Do you want to delete your post?')){
+	if(confirm('삭제하시겠습니까?')){
 			$.ajax({
 				method : "post",
 				url : "delete",
@@ -30,7 +30,7 @@ function deleteBoard(){
 				},
 				success : function(result) {
 					if(result==1){
-					alert('Your post is deleted successfully');
+					alert('삭제되었습니다!');
 					location.href = "${pageContext.request.contextPath}/notice";
 					}
 				}

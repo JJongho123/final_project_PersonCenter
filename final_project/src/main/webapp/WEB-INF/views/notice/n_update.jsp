@@ -67,6 +67,7 @@
 								name="board_no_title" placeholder="제목" required
 								class="form-control"
 								aria-label="Text input with dropdown button"
+								value="${board.board_no_title }"
 								style="width: 300px">
 							</div>
 						<br>
@@ -80,7 +81,8 @@
 					</div>
 					<h1>ㅤ</h1>
 						<textArea id="board_no_content" name="board_no_content" required
-							class="form-control" rows="20"></textArea>
+							class="form-control" rows="20"
+							>${board.board_no_content }</textArea>
 						<h1>ㅤ</h1>
 						<input type="submit" class="btn btn-default" id="btn" value="글수정"
 							style="float: right; background-color: #d7ebc2; border-radius: 10px">

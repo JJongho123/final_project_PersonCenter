@@ -127,7 +127,6 @@
 								data-toggle="dropdown" href="#"> <span
 									class="me-a text-nowrap f-md en px-4">메세지 
 									</span>
-								
 							</a>
 								<ul class="dropdown-menu">
 									
